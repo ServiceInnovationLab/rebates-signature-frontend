@@ -1,33 +1,89 @@
-.App {
-  text-align: center;
+.sigCanvas {
+  touch-action: none;
+  margin: 20px 0;
+  display: block;
+  flex: 1;
+  background-color: white;
+  border: 1px solid black;
+  //width: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000;
 }
 
-.App-link {
-  color: #61dafb;
+#root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
+
+.test-content{
+  flex: 1 0 auto;
+  padding: 0 50px;
+}
+
+.test-controls {
+  margin: 25px 50px
+}
+
+.sign-applicant {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #efefef;
+  padding: 15px 60px;
+}
+
+button.next {
+  background-color: #369;
+  color: #fff !important;
+  border: 1px solid #247;
+  border-radius: 5px;
+  text-decoration: none;
+  position: relative;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 16px;
+  min-height: 42px;
+  min-width: 200px;
+  display: inline-block;
+  min-height: 54px;
+  float:right;
+}
+
+button.back {
+  background-color: #eee;
+  color: #0 !important;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+  position: relative;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 16px;
+  min-height: 42px;
+  min-width: 200px;
+  display: inline-block;
+  min-height: 54px;
+}
+
+header {
+  padding: 50px;
+  background: black;
+}
+
