@@ -78,9 +78,9 @@ export const SignatureSubmitter = (props) => {
                 </div>
                 }
             </div>
-            <div className="test-controls">
-                <button name="submit" onClick={() => submitSignatures()}>Submit signatures</button>
-                <button name="cancel" onClick={props.onCancel}>Cancel submit signatures</button>
+            <div className="controls">
+                <button className='back' name="cancel" onClick={props.onCancel}>Cancel submit signatures</button>
+                <button className='next' name="submit" onClick={() => submitSignatures()}>Submit signatures</button>
             </div>
         </div>
     )

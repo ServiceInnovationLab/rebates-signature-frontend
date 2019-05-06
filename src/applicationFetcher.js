@@ -39,18 +39,6 @@ const reducer = (state, action) => {
     return state;
 };
 
-const FetchApplicationButton = (props) => {
-    return (
-        <button onClick={props.onClick}>Fetch</button>
-    )
-};
-
-const StopButton = (props) => {
-    return (
-        <button onClick={props.onClick}>Stop</button>
-    )
-};
-
 const IdField = (props) => {
     const  [id, setId] = useState('');
 
@@ -85,43 +73,51 @@ export const ApplicationFetcher = (props) => {
     }
 
     return (
-        <div>
-            <pre>{JSON.stringify(state, null, ' ')}</pre>
-
+        <>
             <div className="test-content">
                 <h1>Rates Rebate 2018/2019</h1>
                 <h2>{props.title}</h2>
+
+                {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
+                <IdField />
+                }
 
                 {state.fetchingApplication &&
                 <div>Fetching application...</div>
                 }
 
-                {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
-                <div>
-                    <IdField />
-                    <FetchApplicationButton onClick={() => fetchApplication()} />
-                    <StopButton onClick={props.onCancel} />
-                </div>
-                }
-
                 {state.fetchedApplication &&
                 <div>
-                    <div>Application fetched</div>
-                    <button name="startOver" onClick={() => props.onFetchedApplication(state.data)}>next</button>
+                    Application fetched
+                    <pre>{JSON.stringify(state.data, null, ' ')}</pre>
                 </div>
                 }
 
                 {state.fetchingApplicationError &&
                 <div>
                     <div>Error while fetching application...</div>
-                    <button onClick={() => retryFetchApplication()}>retry</button>
                 </div>
                 }
             </div>
-            <div className="test-controls">
-                <button name="submit" onClick={props.onFetchedApplication}>Submit signatures</button>
-                <button name="cancel" onClick={props.onCancel}>Cancel</button>
+            <div className="controls">
+                <button className='back' name="cancel" onClick={props.onCancel}>Cancel</button>
+
+                {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
+                <button className='next' name="submit" onClick={() => fetchApplication()}>Fetch application</button>
+                }
+
+                {state.fetchingApplication &&
+                <button className='next' disabled>Fetching...</button>
+                }
+
+                {state.fetchingApplicationError &&
+                    <button className='next' onClick={() => retryFetchApplication()}>retry</button>
+                }
+
+                {state.fetchedApplication &&
+                <button className='next' name="startOver" onClick={() => props.onFetchedApplication(state.data)}>next</button>
+                }
             </div>
-        </div>
+        </>
     )
 };
