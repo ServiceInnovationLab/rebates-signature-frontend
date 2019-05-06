@@ -67,20 +67,34 @@ export const SignatureSubmitter = (props) => {
                 {state.signaturesSubmitted &&
                 <div>
                     <div>signatures submitted</div>
-                    <button name="startOver" onClick={props.onSubmitted}>start over</button>
                 </div>
                 }
 
                 {state.submittingSignaturesError &&
                 <div>
                     <div>Error while submitting signatures...</div>
-                    <button onClick={() => retrySubmitSignatures()}>retry</button>
                 </div>
                 }
             </div>
+
             <div className="controls">
                 <button className='back' name="cancel" onClick={props.onCancel}>Cancel submit signatures</button>
+
+                {!state.signaturesSubmitted && !state.submittingSignatures && !state.submittingSignaturesError &&
                 <button className='next' name="submit" onClick={() => submitSignatures()}>Submit signatures</button>
+                }
+
+                {state.submittingSignatures &&
+                <button className='next' name="submit" disabled>Submitting...</button>
+                }
+
+                {state.submittingSignaturesError &&
+                <button className='next' onClick={() => retrySubmitSignatures()}>retry</button>
+                }
+
+                {state.signaturesSubmitted &&
+                <button className='next' name="startOver" onClick={props.onSubmitted}>Next</button>
+                }
             </div>
         </div>
     )

@@ -39,17 +39,6 @@ const reducer = (state, action) => {
     return state;
 };
 
-const IdField = (props) => {
-    const  [id, setId] = useState('');
-
-    return (
-        <div>
-            <label>Application Id</label>
-            <input id="id" type="text" name="id" value={id} onChange={(e) => setId(e.target.value)} />
-        </div>
-    );
-};
-
 export const ApplicationFetcher = (props) => {
     const initialState = {
         fetchingApplication: false,
@@ -74,12 +63,17 @@ export const ApplicationFetcher = (props) => {
 
     return (
         <>
+            <pre>{JSON.stringify(state, null, ' ')}</pre>
+
             <div className="test-content">
                 <h1>Rates Rebate 2018/2019</h1>
                 <h2>{props.title}</h2>
 
                 {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
-                <IdField />
+                <div>
+                    <label>Application Id</label>
+                    <input id="id" type="text" name="id" value={id} onChange={(e) => setId(e.target.value)} />
+                </div>
                 }
 
                 {state.fetchingApplication &&
@@ -99,6 +93,7 @@ export const ApplicationFetcher = (props) => {
                 </div>
                 }
             </div>
+
             <div className="controls">
                 <button className='back' name="cancel" onClick={props.onCancel}>Cancel</button>
 
@@ -111,7 +106,7 @@ export const ApplicationFetcher = (props) => {
                 }
 
                 {state.fetchingApplicationError &&
-                    <button className='next' onClick={() => retryFetchApplication()}>retry</button>
+                <button className='next' onClick={() => retryFetchApplication()}>retry</button>
                 }
 
                 {state.fetchedApplication &&

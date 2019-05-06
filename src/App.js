@@ -4,17 +4,19 @@ import { useReducer } from 'react';
 import './App.css';
 import {SignatureSubmitter} from "./signatureSubmitter";
 import {ApplicationFetcher} from "./applicationFetcher";
+
 import {Signature} from "./signature";
 import logo from './images/footer-logo-govt.png';
 
 const reducer = (state, action) => {
+    console.log(state, action);
+
     switch (action.type) {
         case 'START':
             return {
                 ...state,
                 started: true,
                 fetchedApplication: false,
-                correctApplication: -1,
                 signedByApplicant: false,
                 signedByWitness: false,
                 data: {
@@ -28,33 +30,68 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 fetchedApplication: true,
+                signedByApplicant: false,
+                signedByWitness: false,
                 data: {
                     ...state.data,
                     applicationId: action.applicationData.applicationId,
                     name: action.applicationData.name,
                 }
             };
-        case 'CONFIRM_CORRECT_APPLICATION':
-            return {
-                ...state,
-                correctApplication: true,
-            };
         case 'APPLICANT_SIGNED':
             return {
                 ...state,
                 signedByApplicant: true,
+                signedByWitness: false,
                 data: {
                     ...state.data,
-                    signatureApplicant: action.signature
+                    signatureApplicant: action.signature,
+                    signatureWitness: ''
+                }
+            };
+        case 'CANCEL_APPLICANT_SIGN':
+            return {
+                ...state,
+                fetchedApplication: false,
+                signedByApplicant: false,
+                signedByWitness: false,
+                data: {
+                    ...state.data,
+                    signatureApplicant: '',
+                    signatureWitness: ''
                 }
             };
         case 'WITNESS_SIGNED':
             return {
                 ...state,
+                signedByApplicant: true,
                 signedByWitness: true,
                 data: {
                     ...state.data,
                     signatureWitness: action.signature
+                }
+            };
+        case 'CANCEL_WITNESS_SIGN':
+            return {
+                ...state,
+                fetchedApplication: true,
+                signedByApplicant: false,
+                signedByWitness: false,
+                data: {
+                    ...state.data,
+                    signatureApplicant: '',
+                    signatureWitness: ''
+                }
+            };
+        case 'CANCEL_SUBMIT_NOTICE':
+            return {
+                ...state,
+                fetchedApplication: true,
+                signedByApplicant: true,
+                signedByWitness: false,
+                data: {
+                    ...state.data,
+                    signatureWitness: ''
                 }
             };
         case 'RESET':
@@ -62,7 +99,6 @@ const reducer = (state, action) => {
                 ...state,
                 started: false,
                 fetchedApplication: false,
-                correctApplication: false,
                 signedByApplicant: false,
                 signedByWitness: false,
                 data: {}
@@ -77,21 +113,6 @@ const StartButton = (props) => {
     return (
         <button onClick={props.onClick}>Start</button>
     )
-};
-
-const StopButton = (props) => {
-    return (
-        <button onClick={props.onClick}>Stop</button>
-    )
-};
-
-const ConfirmCorrectApplication = (props) => {
-    return (
-        <div>
-            <button name="correct" onClick={props.correct}>Correct</button>
-            <button name="incorrect" onClick={props.incorrect}>Incorrect</button>
-        </div>
-    );
 };
 
 function App() {
@@ -123,43 +144,26 @@ function App() {
                     onFetchedApplication={(applicationData) => dispatch({type: 'FETCHED_APPLICATION', applicationData})}
                   />}
 
-                  {state.fetchedApplication && state.correctApplication === -1 &&
-                  <div>
-                      <div>Confirm correct application</div>
-                      <p>
-                          {state.data.name}
-                          Summary details here...
-                      </p>
-                      <ConfirmCorrectApplication
-                          correct={() => dispatch({type: 'CONFIRM_CORRECT_APPLICATION'})}
-                          incorrect={() => dispatch({type: 'RESET'})}
-                      />
-                      <StopButton onClick={() => dispatch({type: 'RESET'})} />
-                  </div>
-                  }
-
-                  {state.correctApplication === true && !state.signedByApplicant &&
+                  {state.fetchedApplication && !state.signedByApplicant &&
                   <Signature
                       title="Customer signature"
                       onBegin={() => hideDiv('div1')}
-                      next={(signature) => dispatch({type: 'APPLICANT_SIGNED', signature})}
-                      back={() => dispatch({type: 'RESET'})}/>
+                      next={(data) => dispatch({type: 'APPLICANT_SIGNED', signature: data.signature})}
+                      back={() => dispatch({type: 'CANCEL_APPLICANT_SIGN'})}/>
                   }
-
-                  {state.correctApplication === true && state.signedByApplicant && !state.signedByWitness &&
+                  {state.fetchedApplication && state.signedByApplicant && !state.signedByWitness &&
                   <Signature
                       title="Witness signature"
-                      next={(signature) => dispatch({type: 'WITNESS_SIGNED', signature})}
-                      back={() => dispatch({type: 'RESET'})}/>
+                      next={(data) => dispatch({type: 'WITNESS_SIGNED', signature: data.signature})}
+                      back={() => dispatch({type: 'CANCEL_WITNESS_SIGN'})}/>
                   }
 
                   {state.signedByApplicant && state.signedByWitness &&
                   <SignatureSubmitter
                       title="Ready to submit signatures"
-                      onCancel={() => dispatch({type: 'RESET'})}
+                      onCancel={() => dispatch({type: 'CANCEL_SUBMIT_NOTICE'})}
                       onSubmitted={() => dispatch({type: 'RESET'})}
-                  />
-                  }
+                  />}
                 </div>
                 }
             </div>
