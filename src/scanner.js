@@ -12,12 +12,10 @@ export const Scanner = (props) => {
 
     const handleError = err => {
         props.onScan(err);
-        console.error(err);
     };
 
     return (
         <div>
-            <input type="file" accept="video/*;capture=camcorder" />
             <QrReader
                 delay={300}
                 onError={handleError}
