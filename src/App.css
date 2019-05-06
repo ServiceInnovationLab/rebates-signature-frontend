@@ -109,7 +109,7 @@ header {
 }
 
 
-@media all and (max-width: 375px) {
+@media all and (max-width: 400px) {
   button.back {
     max-width: 70px;
     min-width: 1px;
