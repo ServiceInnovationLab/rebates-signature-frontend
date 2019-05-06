@@ -3,6 +3,14 @@ import { useReducer } from 'react';
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'SET_ID':
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    applicationId: action.id
+                }
+            }
         case 'FETCHING_APPLICATION':
             return {
                 ...state,
@@ -10,8 +18,7 @@ const reducer = (state, action) => {
                 fetchingApplicationError: false,
                 fetchedApplication: false,
                 data: {
-                    ...state.data,
-                    applicationId: '123'
+                    ...state.data
                 }
             };
         case 'FETCHING_APPLICATION_ERROR':
@@ -29,7 +36,6 @@ const reducer = (state, action) => {
                 correctApplication: -1,
                 data: {
                     ...state.data,
-                    applicationId: 123,
                     name: 'jan janssen'
                 }
             };
@@ -44,6 +50,9 @@ export const ApplicationFetcher = (props) => {
         fetchingApplication: false,
         fetchedApplication: false,
         fetchingApplicationError: false,
+        data: {
+            applicationId: ''
+        }
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -72,7 +81,7 @@ export const ApplicationFetcher = (props) => {
                 {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
                 <div>
                     <label>Application Id</label>
-                    <input id="id" type="text" name="id" value={id} onChange={(e) => setId(e.target.value)} />
+                    <input id="id" type="text" name="id" value={state.data.applicationId} onChange={(e) => dispatch({type: 'SET_ID', id: e.target.value})} />
                 </div>
                 }
 
