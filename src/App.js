@@ -28,7 +28,7 @@ function App() {
             <header>
                 <img src={logo} />
             </header>
-            <pre>{JSON.stringify(state, null, ' ')}</pre>
+            <pre className="debug">{JSON.stringify(state, null, ' ')}</pre>
 
             <div className="content">
                 {!state.started &&

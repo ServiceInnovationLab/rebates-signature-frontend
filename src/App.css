@@ -1,3 +1,7 @@
+.debug {
+  display: none;
+}
+
 .sigCanvas {
   touch-action: none;
   margin: 20px 0;

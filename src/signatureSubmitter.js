@@ -54,7 +54,7 @@ export const SignatureSubmitter = (props) => {
 
     return (
         <div>
-            <pre>{JSON.stringify(state, null, ' ')}</pre>
+            <pre className="debug">{JSON.stringify(state, null, ' ')}</pre>
 
             <div className="test-content">
                 <h1>Rates Rebate 2018/2019</h1>

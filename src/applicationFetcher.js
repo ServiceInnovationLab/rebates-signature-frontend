@@ -74,7 +74,7 @@ export const ApplicationFetcher = (props) => {
 
     return (
         <>
-            <pre>{JSON.stringify(state, null, ' ')}</pre>
+            <pre className="debug">{JSON.stringify(state, null, ' ')}</pre>
 
             <div className="test-content">
                 <h1>Rates Rebate 2018/2019</h1>
@@ -94,7 +94,7 @@ export const ApplicationFetcher = (props) => {
                 {state.fetchedApplication &&
                 <div>
                     Application fetched
-                    <pre>{JSON.stringify(state.data, null, ' ')}</pre>
+                    <pre className="debug">{JSON.stringify(state.data, null, ' ')}</pre>
                 </div>
                 }
 
