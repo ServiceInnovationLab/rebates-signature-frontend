@@ -36,7 +36,7 @@ function App() {
                 }
 
                 {state.started &&
-                <div>
+                <div className="content2">
                   {!state.fetchedApplication &&
                   <ApplicationFetcher
                     title="Enter your application id"

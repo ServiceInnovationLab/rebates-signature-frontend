@@ -5,7 +5,7 @@ export const Signature = (props) => {
     let sigCanvas = null;
 
     return (
-        <div>
+        <div className="content2">
             <div className="test-content">
                 <h1>Rates Rebate 2018/2019</h1>
                 <h2>{props.title}</h2>

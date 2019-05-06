@@ -2,6 +2,10 @@
   display: none;
 }
 
+div {
+  /*border: 2px solid red;*/
+}
+
 .sigCanvas {
   touch-action: none;
   margin: 20px 0;
@@ -16,7 +20,7 @@
 body {
   display: flex;
   flex-direction: column;
-  /*height: 100vh;*/
+  height: 100vh;
   /*overflow: hidden;*/
   font-family: "Fira", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -31,6 +35,18 @@ body {
 }
 
 .App {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.content2 {
   display: flex;
   flex: 1;
   flex-direction: column;
