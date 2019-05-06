@@ -23,6 +23,7 @@ export const Scanner = (props) => {
                 onError={handleError}
                 onScan={(data) => handleScan(data)}
                 style={{ width: '100%', maxWidth: '500px' }}
+                facingMode="rear"
             />
         </div>
     );
