@@ -10,7 +10,7 @@ export const Scanner = (props) => {
     };
 
     const handleError = err => {
-        props.onScan(data);
+        props.onScan(err);
         console.error(err);
     };
 
