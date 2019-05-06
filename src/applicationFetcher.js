@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useReducer } from 'react';
+
+import { Scanner } from './scanner';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -80,8 +82,8 @@ export const ApplicationFetcher = (props) => {
 
                 {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
                 <div>
-                    <label>Application Id</label>
                     <input id="id" type="text" name="id" value={state.data.applicationId} onChange={(e) => dispatch({type: 'SET_ID', id: e.target.value})} />
+                    <Scanner onScan={(data) => dispatch({type: 'SET_ID', id: data})} />
                 </div>
                 }
 
