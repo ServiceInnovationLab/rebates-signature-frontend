@@ -1,3 +1,4 @@
+
 .debug {
   display: none;
 }
@@ -105,5 +106,21 @@ button.back {
 header {
   padding: 50px;
   background: black;
+}
+
+
+@media all and (max-width: 375px) {
+  button.back {
+    max-width: 70px;
+    min-width: 1px;
+  }
+
+  .test-content {
+    padding: 0;
+  }
+
+  .sign-applicant {
+    padding: 15px 10px;
+  }
 }
 
