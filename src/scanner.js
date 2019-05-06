@@ -16,6 +16,7 @@ export const Scanner = (props) => {
 
     return (
         <div>
+            <input type="file" accept="video/*;capture=camcorder" />
             <QrReader
                 delay={300}
                 onError={handleError}
