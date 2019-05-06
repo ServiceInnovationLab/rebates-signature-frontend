@@ -1,6 +1,6 @@
 import React from 'react';
-// import QrReader from 'react-qr-reader';
-import QrReader from 'react-qr-scanner'
+import QrReader from 'react-qr-reader';
+// import QrReader from 'react-qr-scanner'
 
 export const Scanner = (props) => {
 
