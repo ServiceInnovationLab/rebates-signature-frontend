@@ -12,7 +12,7 @@ const reducer = (state, action) => {
                     ...state.data,
                     applicationId: action.id
                 }
-            }
+            };
         case 'FETCHING_APPLICATION':
             return {
                 ...state,
@@ -20,7 +20,8 @@ const reducer = (state, action) => {
                 fetchingApplicationError: false,
                 fetchedApplication: false,
                 data: {
-                    ...state.data
+                    ...state.data,
+                    applicationId: action.id
                 }
             };
         case 'FETCHING_APPLICATION_ERROR':
@@ -29,6 +30,9 @@ const reducer = (state, action) => {
                 fetchingApplication: false,
                 fetchingApplicationError: true,
                 fetchedApplication: false,
+                data: {
+                    ...state.data
+                }
             };
         case 'FETCHED_APPLICATION':
             return {
@@ -58,15 +62,15 @@ export const ApplicationFetcher = (props) => {
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    function fetchApplication() {
-        dispatch({type: 'FETCHING_APPLICATION'});
+    function fetchApplication(id) {
+        dispatch({type: 'FETCHING_APPLICATION', id: id});
         setTimeout(() => {
             dispatch({type: 'FETCHING_APPLICATION_ERROR'});
         }, 500);
     }
 
-    function retryFetchApplication() {
-        dispatch({type: 'FETCHING_APPLICATION'});
+    function retryFetchApplication(id) {
+        dispatch({type: 'FETCHING_APPLICATION', id: id});
         setTimeout(() => {
             dispatch({type: 'FETCHED_APPLICATION'});
         }, 1000);
@@ -83,7 +87,7 @@ export const ApplicationFetcher = (props) => {
                 {!state.fetchedApplication && !state.fetchingApplication && !state.fetchingApplicationError &&
                 <div>
                     <input id="id" type="text" name="id" value={state.data.applicationId} onChange={(e) => dispatch({type: 'SET_ID', id: e.target.value})} />
-                    <Scanner onScan={(data) => dispatch({type: 'SET_ID', id: data})} />
+                    <Scanner onScan={(data) => fetchApplication(data)} />
                 </div>
                 }
 
@@ -117,7 +121,7 @@ export const ApplicationFetcher = (props) => {
                 }
 
                 {state.fetchingApplicationError &&
-                <button className='next' onClick={() => retryFetchApplication()}>retry</button>
+                <button className='next' onClick={() => retryFetchApplication(state.data.applicationId)}>retry</button>
                 }
 
                 {state.fetchedApplication &&
