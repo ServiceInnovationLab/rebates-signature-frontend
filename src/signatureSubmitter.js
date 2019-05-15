@@ -26,8 +26,6 @@ const reducer = (state, action) => {
             };
         default: throw new Error('Unhandled action type ' + action.type);
     }
-
-    return state;
 };
 
 export const SignatureSubmitter = (props) => {
@@ -54,12 +52,31 @@ export const SignatureSubmitter = (props) => {
 
     return (
         <div className="content2">
-            <pre className="debug">{JSON.stringify(state, null, ' ')}</pre>
+            {/* <pre className="debug">{JSON.stringify(state, null, ' ')}</pre> */}
 
-            <div className="test-content">
-                <h1>Rates Rebate 2018/2019</h1>
-                <h2>{props.title}</h2>
+            <div className="controlsBackground">
+                <div className="controls">
+                    <button className='back' name="cancel" onClick={props.onCancel}>Cancel submit signatures</button>
 
+                    {!state.signaturesSubmitted && !state.submittingSignatures && !state.submittingSignaturesError &&
+                    <button className='next' name="submit" onClick={() => submitSignatures()}>SUBMIT</button>
+                    }
+
+                    {state.submittingSignatures &&
+                    <button className='next' name="submit" disabled>SUBMITTING...</button>
+                    }
+
+                    {state.submittingSignaturesError &&
+                    <button className='next' onClick={() => retrySubmitSignatures()}>RETRY</button>
+                    }
+
+                    {state.signaturesSubmitted &&
+                    <button className='next' name="startOver" onClick={props.onSubmitted}>NEXT</button>
+                    }
+                </div>
+            </div>
+            
+            <div className="text-content">
                 {state.submittingSignatures &&
                 <div>Submitting signatures...</div>
                 }
@@ -74,26 +91,6 @@ export const SignatureSubmitter = (props) => {
                 <div>
                     <div>Error while submitting signatures...</div>
                 </div>
-                }
-            </div>
-
-            <div className="controls">
-                <button className='back' name="cancel" onClick={props.onCancel}>Cancel submit signatures</button>
-
-                {!state.signaturesSubmitted && !state.submittingSignatures && !state.submittingSignaturesError &&
-                <button className='next' name="submit" onClick={() => submitSignatures()}>Submit signatures</button>
-                }
-
-                {state.submittingSignatures &&
-                <button className='next' name="submit" disabled>Submitting...</button>
-                }
-
-                {state.submittingSignaturesError &&
-                <button className='next' onClick={() => retrySubmitSignatures()}>retry</button>
-                }
-
-                {state.signaturesSubmitted &&
-                <button className='next' name="startOver" onClick={props.onSubmitted}>Next</button>
                 }
             </div>
         </div>
