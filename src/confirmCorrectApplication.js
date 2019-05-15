@@ -3,9 +3,9 @@ import React from 'react';
 export const ConfirmCorrectApplication = (props) => {
     return (
         <>
-            <div className="test-content">
-                <h1>Rates Rebate 2018/2019</h1>
-                <h2>{props.title}</h2>
+            <div className="text-content">
+                <h1>{props.title}</h1>
+                <h2></h2>
 
                 <div>
                     <p>
@@ -13,10 +13,11 @@ export const ConfirmCorrectApplication = (props) => {
                     </p>
                 </div>
             </div>
-
-            <div className="controls">
-                <button className='back' name="cancel" onClick={props.onCancel}>Back</button>
-                <button className='next' name="submit" onClick={props.onConfirm}>Next</button>
+            <div className="controlsBackground">
+                <div className="controls">
+                    <button className='back' name="cancel" onClick={props.onCancel}>BACK</button>
+                    <button className='next' name="submit" onClick={props.onConfirm}>NEXT</button>
+                </div>
             </div>
         </>
     )

@@ -1,39 +1,24 @@
 
 export const reducer = (state, action) => {
-    console.log(state, action);
-
     switch (action.type) {
-        case 'START':
+        case 'RECEIVED_TOKEN':
             return {
                 ...state,
-                started: true,
-                fetchedApplication: false,
-                signedByApplicant: false,
-                signedByWitness: false,
-                data: {
-                    applicationId: '',
-                    name: '',
-                    signatureApplicant: '',
-                    signatureWitness: ''
-                }
-            };
+                token: action.token,
+            }
         case 'FETCHED_APPLICATION':
             return {
                 ...state,
-                fetchedApplication: true,
-                signedByApplicant: false,
-                signedByWitness: false,
+                currentScreen: 'SIGN-APPLICANT',
                 data: {
                     ...state.data,
-                    applicationId: action.applicationData.applicationId,
-                    name: action.applicationData.name,
+                    ...action.applicationData
                 }
             };
         case 'APPLICANT_SIGNED':
             return {
                 ...state,
-                signedByApplicant: true,
-                signedByWitness: false,
+                currentScreen: 'SIGN-WITNESS',
                 data: {
                     ...state.data,
                     signatureApplicant: action.signature,
@@ -43,9 +28,7 @@ export const reducer = (state, action) => {
         case 'CANCEL_APPLICANT_SIGN':
             return {
                 ...state,
-                fetchedApplication: false,
-                signedByApplicant: false,
-                signedByWitness: false,
+                currentScreen: 'FETCH-APPLICATION',
                 data: {
                     ...state.data,
                     signatureApplicant: '',
@@ -55,8 +38,6 @@ export const reducer = (state, action) => {
         case 'WITNESS_SIGNED':
             return {
                 ...state,
-                signedByApplicant: true,
-                signedByWitness: true,
                 data: {
                     ...state.data,
                     signatureWitness: action.signature
@@ -65,37 +46,31 @@ export const reducer = (state, action) => {
         case 'CANCEL_WITNESS_SIGN':
             return {
                 ...state,
-                fetchedApplication: true,
-                signedByApplicant: false,
-                signedByWitness: false,
+                currentScreen: 'SIGN-APPLICANT',
                 data: {
                     ...state.data,
                     signatureApplicant: '',
                     signatureWitness: ''
                 }
             };
-        case 'CANCEL_SUBMIT_NOTICE':
-            return {
-                ...state,
-                fetchedApplication: true,
-                signedByApplicant: true,
-                signedByWitness: false,
-                data: {
-                    ...state.data,
-                    signatureWitness: ''
-                }
-            };
-        case 'RESET':
-            return {
-                ...state,
-                started: false,
-                fetchedApplication: false,
-                signedByApplicant: false,
-                signedByWitness: false,
-                data: {}
-            };
+        case 'APPLICATION_SUBMIT_FAILED':
+        return {
+            ...state,
+            data: {
+                ...state.data,
+                signatureApplicant: action.signature,
+                signatureWitness: ''
+            }
+        }
+        case 'APPLICATION_SUBMITTED':
+        return {
+            ...state,
+            currentScreen: 'THANK-YOU',
+            data: {
+                ...state.data,
+                signatureWitness: action.signature
+            }
+        };
         default: throw new Error('Unhandled action type ' + action.type);
     }
-
-    return state;
 };
