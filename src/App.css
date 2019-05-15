@@ -13,10 +13,6 @@ header {
   color: white;
 }
 
-.nzGovtLogo {
-  height: auto;
-}
-
 h1 {
   margin: 1rem 0 0 0;
 }
@@ -43,7 +39,7 @@ h1 {
   padding: 0 50px;
 }
 
-.content2 {
+.content {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -71,6 +67,14 @@ body {
 
 .signatureSection {
   margin: 0;
+}
+
+.signature {
+  flex: 1;
+}
+
+.signature div {
+  flex: 1;
 }
 
 .sigCanvas {

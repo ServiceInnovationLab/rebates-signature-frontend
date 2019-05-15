@@ -1,5 +1,5 @@
 
-export const reducer = (state, action) => {
+export const appReducer = (state, action) => {
     switch (action.type) {
         case 'RECEIVED_TOKEN':
             return {
@@ -38,6 +38,7 @@ export const reducer = (state, action) => {
         case 'WITNESS_SIGNED':
             return {
                 ...state,
+                currentScreen: 'SUBMIT-SIGNATURES',
                 data: {
                     ...state.data,
                     signatureWitness: action.signature
@@ -53,15 +54,6 @@ export const reducer = (state, action) => {
                     signatureWitness: ''
                 }
             };
-        case 'APPLICATION_SUBMIT_FAILED':
-        return {
-            ...state,
-            data: {
-                ...state.data,
-                signatureApplicant: action.signature,
-                signatureWitness: ''
-            }
-        }
         case 'APPLICATION_SUBMITTED':
         return {
             ...state,

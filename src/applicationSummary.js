@@ -1,5 +1,5 @@
 import React from 'react';
-import { useReducer, useEffect } from 'react';
+import {useReducer, useEffect} from 'react';
 import axios from 'axios';
 
 const reducer = (state, action) => {
@@ -7,7 +7,7 @@ const reducer = (state, action) => {
         case 'RETRY':
             return {
                 ...state,
-                fetch: ++state.fetch,
+                retryCount: ++state.retryCount,
             };
         case 'FETCHING_APPLICATION':
             return {
@@ -31,7 +31,8 @@ const reducer = (state, action) => {
                 correctApplication: -1,
                 data: action.data
             };
-        default: throw new Error('Unhandled action type ' + action.type);
+        default:
+            throw new Error('Unhandled action type ' + action.type);
     }
 };
 
@@ -41,7 +42,7 @@ export const ApplicationSummary = (props) => {
         fetchedApplication: false,
         fetchingApplicationError: false,
         token: props.token,
-        fetch: 0,
+        retryCount: 0,
         data: {}
     };
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -72,56 +73,60 @@ export const ApplicationSummary = (props) => {
                     witnessName: 'Brian Brake',
                     witnessTitle: 'Council Officer'
                 };
-                
-                dispatch({type: 'FETCHED_APPLICATION', data: result});
-              } catch(error) {
+
+                setTimeout(() => {
+                    if (state.retryCount < 1) {
+                        dispatch({type: 'FETCHING_APPLICATION_ERROR'});
+                    } else {
+                        dispatch({type: 'FETCHED_APPLICATION', data: result});
+                    }
+                }, 2000);
+            } catch (error) {
                 dispatch({type: 'FETCHING_APPLICATION_ERROR'});
-              }
+            }
         };
 
         fetchData();
-    }, [state.fetch]);
+    }, [state.retryCount]);
 
     return (
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    {state.fetchingApplication &&
-                    <button className='next' disabled>FETCHING...</button>
-                    }
-
                     {state.fetchingApplicationError &&
                     <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
                     }
 
                     {state.fetchedApplication &&
-                    <button className='next' name="startOver" onClick={() => props.onFetchedApplication(state.data)}>NEXT</button>
+                    <button className='next' name="startOver"
+                            onClick={() => props.onFetchedApplication(state.data)}>NEXT</button>
                     }
                 </div>
             </div>
             <div className="text-content">
-                <h1>Application Summary</h1>
-                <h2>{props.title}{state.data.rebateClaim}</h2>
-
-                {state.fetchingApplication &&
-                <div>Fetching application...</div>
-                }
-
                 {state.fetchedApplication &&
-                <div>
-                    Application fetched
-                    <p>My name is <b>{state.data.name}</b> and my occupation is <b>{state.data.occupationStatus}</b>.</p>
+                <>
+                    <h1>Application Summary</h1>
+                    <h2>{props.title}{state.data.rebateClaim}</h2>
 
-                    <p>My address is <b>{state.data.address}</b> and I lived here on 1 July 2018. 
-                    I have not moved within this rating year.</p>
+                    Application fetched
+                    <p>My name is <b>{state.data.name}</b> and my occupation is <b>{state.data.occupationStatus}</b>.
+                    </p>
+
+                    <p>My address is <b>{state.data.address}</b> and I lived here on 1 July 2018.
+                        I have not moved within this rating year.</p>
 
                     <p>My 2018/2019 rates bill (including water) is <b>${state.data.ratesBill}</b>.</p>
 
                     <p>I have <b>{state.data.noOfDependants}</b> dependant(s).</p>
 
                     <p>The combined income of myself and my [partner or joint home owner] living with me
-                     on 1 July 2018 for the 2017/2018 tax year was <b>${state.data.combinedIncome}</b>.</p>
-                </div>
+                        on 1 July 2018 for the 2017/2018 tax year was <b>${state.data.combinedIncome}</b>.</p>
+                </>
+                }
+
+                {state.fetchingApplication &&
+                <div>Fetching application...</div>
                 }
 
                 {state.fetchingApplicationError &&

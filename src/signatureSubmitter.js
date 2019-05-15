@@ -1,5 +1,5 @@
 import React from 'react';
-import { useReducer } from 'react';
+import {useReducer, useEffect} from 'react';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -24,7 +24,13 @@ const reducer = (state, action) => {
                 submittingSignaturesError: false,
                 signaturesSubmitted: true
             };
-        default: throw new Error('Unhandled action type ' + action.type);
+        case 'RETRY':
+            return {
+                ...state,
+                retryCount: ++state.retryCount
+            };
+        default:
+            throw new Error('Unhandled action type ' + action.type);
     }
 };
 
@@ -33,49 +39,57 @@ export const SignatureSubmitter = (props) => {
         submittingSignatures: false,
         signaturesSubmitted: false,
         submittingSignaturesError: false,
+        retryCount: 0
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    function submitSignatures() {
-        dispatch({type: 'SUBMITTING_SIGNATURES'});
-        setTimeout(() => {
-            dispatch({type: 'SUBMITTING_SIGNATURES_ERROR'});
-        }, 1000);
-    }
+    useEffect(() => {
+        const submitData = async () => {
+            dispatch({type: 'SUBMITTING_SIGNATURES'});
 
-    function retrySubmitSignatures() {
-        dispatch({type: 'SUBMITTING_SIGNATURES'});
-        setTimeout(() => {
-            dispatch({type: 'SUBMITTED_SIGNATURES'});
-        }, 1000);
-    }
+            try {
+                let result = {
+                    name: 'Jan Janssen',
+                    occupationStatus: 'retired',
+                    address: '191 Thorndon Quay, Wellington 6011',
+                    ratesBill: 3749.52,
+                    noOfDependants: 0,
+                    combinedIncome: 21484.32,
+                    rebateClaim: 450,
+                    location: 'Tauranga City Council',
+                    day: 'Monday',
+                    month: 'June',
+                    year: 2019,
+                    witnessName: 'Brian Brake',
+                    witnessTitle: 'Council Officer'
+                };
+
+                setTimeout(() => {
+                    if (state.retryCount < 1) {
+                        dispatch({type: 'SUBMITTING_SIGNATURES_ERROR'});
+                    } else {
+                        dispatch({type: 'SUBMITTED_SIGNATURES', data: result});
+                        props.onSubmitted();
+                    }
+                }, 2000);
+            } catch (error) {
+                dispatch({type: 'SUBMITTING_SIGNATURES_ERROR'});
+            }
+        };
+
+        submitData();
+    }, [props, state.retryCount]);
 
     return (
-        <div className="content2">
-            {/* <pre className="debug">{JSON.stringify(state, null, ' ')}</pre> */}
-
+        <>
             <div className="controlsBackground">
                 <div className="controls">
-                    <button className='back' name="cancel" onClick={props.onCancel}>Cancel submit signatures</button>
-
-                    {!state.signaturesSubmitted && !state.submittingSignatures && !state.submittingSignaturesError &&
-                    <button className='next' name="submit" onClick={() => submitSignatures()}>SUBMIT</button>
-                    }
-
-                    {state.submittingSignatures &&
-                    <button className='next' name="submit" disabled>SUBMITTING...</button>
-                    }
-
                     {state.submittingSignaturesError &&
-                    <button className='next' onClick={() => retrySubmitSignatures()}>RETRY</button>
-                    }
-
-                    {state.signaturesSubmitted &&
-                    <button className='next' name="startOver" onClick={props.onSubmitted}>NEXT</button>
+                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
                     }
                 </div>
             </div>
-            
+
             <div className="text-content">
                 {state.submittingSignatures &&
                 <div>Submitting signatures...</div>
@@ -89,10 +103,10 @@ export const SignatureSubmitter = (props) => {
 
                 {state.submittingSignaturesError &&
                 <div>
-                    <div>Error while submitting signatures...</div>
+                    <div>Error while submitting signatures, please try again...</div>
                 </div>
                 }
             </div>
-        </div>
+        </>
     )
 };
