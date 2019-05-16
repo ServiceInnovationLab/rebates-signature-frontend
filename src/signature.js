@@ -18,7 +18,6 @@ export const Signature = (props) => {
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    <button className='back' name="sign" onClick={props.back}>GO BACK</button>
                     <button
                         className='next'
                         name="sign"
