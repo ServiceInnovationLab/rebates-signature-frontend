@@ -64,28 +64,23 @@ export const ApplicationSummary = (props) => {
                     address: '191 Thorndon Quay, Wellington 6011',
                     ratesBill: 3749.52,
                     noOfDependants: 0,
+                    singleIncome: 1050,
                     combinedIncome: 21484.32,
                     rebateClaim: 450,
                     location: 'Tauranga City Council',
-                    day: 'Monday',
-                    month: 'June',
-                    year: 2019,
+                    day: 'Monday', // Pulled through from current day
+                    month: 'June', // Pulled through from current month
+                    year: 2018, // Pulled through from current year
                     witnessName: 'Brian Brake',
-                    witnessTitle: 'Council Officer'
-                };
-
-                setTimeout(() => {
-                    if (state.retryCount < 1) {
-                        dispatch({type: 'FETCHING_APPLICATION_ERROR'});
-                    } else {
-                        dispatch({type: 'FETCHED_APPLICATION', data: result});
-                    }
-                }, 2000);
-            } catch (error) {
+                    witnessTitle: 'Council Officer',
+                    taxYear: '2018/2019', // Pulled through from current tax year,
+                    partner: true
+                };  
+                dispatch({type: 'FETCHED_APPLICATION', data: result});
+              } catch(error) {
                 dispatch({type: 'FETCHING_APPLICATION_ERROR'});
             }
         };
-
         fetchData();
     }, [state.retryCount]);
 
@@ -105,28 +100,25 @@ export const ApplicationSummary = (props) => {
             </div>
             <div className="text-content">
                 {state.fetchedApplication &&
-                <>
-                    <h1>Application Summary</h1>
-                    <h2>{props.title}{state.data.rebateClaim}</h2>
+                <div>
+                    <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.</p>
 
-                    Application fetched
-                    <p>My name is <b>{state.data.name}</b> and my occupation is <b>{state.data.occupationStatus}</b>.
-                    </p>
+                    <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July {state.data.year}. 
+                    I have not moved within this rating year.</p>
 
-                    <p>My address is <b>{state.data.address}</b> and I lived here on 1 July 2018.
-                        I have not moved within this rating year.</p>
+                    <p>My {state.data.taxYear} rates bill (including water) is <strong>${state.data.ratesBill}</strong>.</p>
 
-                    <p>My 2018/2019 rates bill (including water) is <b>${state.data.ratesBill}</b>.</p>
-
-                    <p>I have <b>{state.data.noOfDependants}</b> dependant(s).</p>
-
+                    <p>I have <strong>{state.data.noOfDependants}</strong> dependant(s).</p>
+                    
+                    {!state.data.partner &&
                     <p>The combined income of myself and my [partner or joint home owner] living with me
-                        on 1 July 2018 for the 2017/2018 tax year was <b>${state.data.combinedIncome}</b>.</p>
-                </>
-                }
-
-                {state.fetchingApplication &&
-                <div>Fetching application...</div>
+                     on 1 July {state.data.year} for the {state.data.taxYear} tax year was <strong>${state.data.combinedIncome}</strong>.</p>
+                    }
+                    
+                    {state.data.partner &&
+                    <p>My income for the {state.data.taxYear} tax year was <strong>${state.data.singleIncome}</strong>.</p>
+                    }
+             </div>
                 }
 
                 {state.fetchingApplicationError &&
