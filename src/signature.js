@@ -18,16 +18,19 @@ export const Signature = (props) => {
 
             <div className="text-content">
                 <h1>{props.title}</h1>
-                <h2>{props.subheading}</h2>
+                <p class="summary">{props.subheading}</p>
 
                 <div className='signature'>
-                    <div>
+                    <div className="wrap-signature">
+                        {/* todo JUAN - hardcoded error state below  */}
+                        <p className="signature-error">Please sign before you proceed</p>
+
                         <SignatureCanvas
                             ref={(ref) => {
                                 sigCanvas = ref;
                             }}
                             penColor='green'
-                            canvasProps={{width: 1500, className: 'sigCanvas'}}
+                            canvasProps={{width: '750px', height: '240px', className: 'sigCanvas'}}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.data}/>}
@@ -41,8 +44,8 @@ export const Signature = (props) => {
 const DeclarationApplicant = (props) => {
     return (
         <p className="signatureSection">
-            I, <b>{props.data.name}</b> of <b>{props.data.address}</b>,
-            occupation <b>{props.data.occupationStatus}</b> solemnly and sincerely declare that I believe the
+            I, <strong>{props.data.name}</strong> of <strong>{props.data.address}</strong>,
+            occupation <strong>{props.data.occupationStatus}</strong> solemnly and sincerely declare that I believe the
             information
             I have given on this form is true and correct, and I make this solemn declaration conscientiously believing
             the
@@ -54,10 +57,9 @@ const DeclarationApplicant = (props) => {
 const DeclarationWitness = (props) => {
     return (
         <p className="signatureSection">
-            Declared at <b>{props.data.location}</b> this <b>{props.data.day}</b>
-            of <b>{props.data.month}</b> <b>{props.data.year}</b> before me,
-            <b>{props.data.witnessName}</b> <b>({props.data.witnessTitle})</b>.
+            Declared at <strong>{props.data.location}</strong> this <strong>{props.data.day}</strong>
+            of <strong>{props.data.month}</strong> <strong>{props.data.year}</strong> before me,
+            <strong>{props.data.witnessName}</strong> <strong>({props.data.witnessTitle})</strong>.
         </p>
     )
 }
-    

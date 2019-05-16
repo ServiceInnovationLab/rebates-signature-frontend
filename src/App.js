@@ -7,7 +7,7 @@ import {SignatureSubmitter} from "./signatureSubmitter";
 import {ApplicationSummary} from "./applicationSummary";
 
 import {Signature} from "./signature";
-import tick from './images/tick.png';
+import tick from './images/tick.svg';
 
 // http://localhost:3000/?t=eyJhbGciOiJIUzI1NiJ9.eyJhcHBsaWNhdGlvbklkIjoxOCwiZXhwIjoxNTU3ODgxODM0LCJwZXIiOiJmZXRjaF9hcHBsaWNhdGlvbl9hbmRfc3VibWl0X3NpZ25hdHVyZXMifQ.vJ7iOTmJ3oOZTKIDJfFiT0_biqmKMxmw-4brlvXco2s
 

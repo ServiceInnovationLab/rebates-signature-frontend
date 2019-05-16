@@ -110,29 +110,27 @@ export const ApplicationSummary = (props) => {
                     <h2>{props.title}{state.data.rebateClaim}</h2>
 
                     Application fetched
-                    <p>My name is <b>{state.data.name}</b> and my occupation is <b>{state.data.occupationStatus}</b>.
+                    <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.
                     </p>
 
-                    <p>My address is <b>{state.data.address}</b> and I lived here on 1 July 2018.
+                    <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July 2018.
                         I have not moved within this rating year.</p>
 
-                    <p>My 2018/2019 rates bill (including water) is <b>${state.data.ratesBill}</b>.</p>
+                    <p>My 2018/2019 rates bill (including water) is <strong>${state.data.ratesBill}</strong>.</p>
 
-                    <p>I have <b>{state.data.noOfDependants}</b> dependant(s).</p>
+                    <p>I have <strong>{state.data.noOfDependants}</strong> dependant(s).</p>
 
                     <p>The combined income of myself and my [partner or joint home owner] living with me
-                        on 1 July 2018 for the 2017/2018 tax year was <b>${state.data.combinedIncome}</b>.</p>
+                        on 1 July 2018 for the 2017/2018 tax year was <strong>${state.data.combinedIncome}</strong>.</p>
                 </>
                 }
 
                 {state.fetchingApplication &&
-                <div>Fetching application...</div>
+                <p className="system-msg system-msg--processing">Fetching application...</p>
                 }
 
                 {state.fetchingApplicationError &&
-                <div>
-                    <div>Error while fetching application...</div>
-                </div>
+                    <p className="system-msg system-msg--error">Error while fetching application...</p>
                 }
             </div>
         </>
