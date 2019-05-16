@@ -2,6 +2,8 @@ import React from 'react';
 import {useReducer, useEffect} from 'react';
 import axios from 'axios';
 
+import {Preloader} from './preloader';
+
 const reducer = (state, action) => {
     switch (action.type) {
         case 'RETRY':
@@ -80,7 +82,7 @@ export const ApplicationSummary = (props) => {
                     } else {
                         dispatch({type: 'FETCHED_APPLICATION', data: result});
                     }
-                }, 2000);
+                }, 4000);
             } catch (error) {
                 dispatch({type: 'FETCHING_APPLICATION_ERROR'});
             }
@@ -91,6 +93,8 @@ export const ApplicationSummary = (props) => {
 
     return (
         <>
+            {state.fetchingApplication && <Preloader />}
+
             <div className="controlsBackground">
                 <div className="controls">
                     {state.fetchingApplicationError &&
@@ -105,7 +109,7 @@ export const ApplicationSummary = (props) => {
             </div>
             <div className="text-content">
                 {state.fetchedApplication &&
-                <>
+                <div className="fade-in">
                     <h1>Application Summary</h1>
                     <h2>{props.title}{state.data.rebateClaim}</h2>
 
@@ -122,11 +126,7 @@ export const ApplicationSummary = (props) => {
 
                     <p>The combined income of myself and my [partner or joint home owner] living with me
                         on 1 July 2018 for the 2017/2018 tax year was <strong>${state.data.combinedIncome}</strong>.</p>
-                </>
-                }
-
-                {state.fetchingApplication &&
-                <p className="system-msg system-msg--processing">Fetching application...</p>
+                </div>
                 }
 
                 {state.fetchingApplicationError &&

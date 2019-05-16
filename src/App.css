@@ -254,6 +254,19 @@ button.reset {
   left: 27%;
 }
 
+.fade-in {
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media only screen 
 and (min-device-width : 1025px) 
 and (max-device-width : 1366px) 
