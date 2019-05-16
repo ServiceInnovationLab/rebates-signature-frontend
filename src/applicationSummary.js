@@ -118,13 +118,16 @@ export const ApplicationSummary = (props) => {
                     {state.data.partner &&
                     <p>My income for the {state.data.taxYear} tax year was <strong>${state.data.singleIncome}</strong>.</p>
                     }
-             </div>
+                </div>
+                }
+
+                {state.fetchingApplication &&
+                <p className="system-msg system-msg--processing">Fetching application...</p>
+
                 }
 
                 {state.fetchingApplicationError &&
-                <div>
-                    <div>Error while fetching application...</div>
-                </div>
+                    <p className="system-msg system-msg--error">Error while fetching application...</p>
                 }
             </div>
         </>

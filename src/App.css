@@ -3,19 +3,67 @@
   display: block; /* none */
 }
 
+body{
+  line-height: 1.5;
+}
+
+p{
+  margin-top: 0;
+}
+
 div {
   /* border: 2px solid red; */
 }
 
 header {
-  padding: 0 1rem;
+  padding: 0 48px;
   background: black;
   color: white;
 }
 
 h1 {
   margin: 1rem 0 0 0;
+  font-size: 44px;
+
 }
+
+p.summary {
+  font-size: 26px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+p.system-msg {
+  margin: 1em;
+  padding: .5em;
+}
+
+p.system-msg.system-msg--processing {
+  border-left: 3px solid green;
+}
+
+
+p.system-msg.system-msg--error{
+  border-left: 3px solid #b10e1e;
+}
+
+
+p.signature-error {
+  color: #b10e1e;
+  font-weight: bold; /* todo fira bold */
+  font-size: 18px;
+  padding-left: 22px;
+}
+
+p.signature-error:before{
+  content: '';
+  border-right: 3px solid #b10e1e;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
 
 #root {
   display: flex;
@@ -29,7 +77,6 @@ h1 {
   flex-direction: column;
   max-width: 100%;
   height: auto;
-  border: 2px solid red;
 }
 
 .text-content {
@@ -37,6 +84,12 @@ h1 {
   flex: 1 0 auto;
   flex-direction: column;
   padding: 0 50px;
+
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+
+
 }
 
 .content {
@@ -58,12 +111,19 @@ body {
 }
 
 .controlsBackground {
-  background-color: #efefef;
+  background-color: #EBEBEB;
+  min-height: 82px;
 }
 
 .controls {
   margin: 1rem 3rem; /* 25px 50px */
 }
+
+.controls:after {
+   display: block;
+   content: "";
+   clear: both;
+ }
 
 .signatureSection {
   margin: 0;
@@ -71,6 +131,11 @@ body {
 
 .signature {
   flex: 1;
+}
+
+.wrap-signature {
+  margin-top: 50px;
+  position: relative; /* contain error msg */
 }
 
 .signature div {
@@ -83,8 +148,8 @@ body {
   display: block;
   flex: 1;
   background-color: white;
-  border: 1px solid black;
-  height: 18rem;
+  border-bottom: 1px solid #ABABAB;
+  /*height: 18rem;*/
 }
 
 .sign-applicant {
@@ -124,10 +189,9 @@ button.next {
   padding: 12px;
   font-size: 16px;
   line-height: 16px;
-  min-height: 42px;
-  min-width: 150px;
+  min-width: 100px;
+  min-height: 50px;
   /* display: inline-block; */
-  min-height: 54px;
   float: right;
 }
 
@@ -141,9 +205,11 @@ button.back {
   padding: 12px;
   font-size: 16px;
   line-height: 16px;
-  min-width: 150px;
+  /*min-width: 150px;*/
   display: inline-block;
-  min-height: 54px;
+  /*min-height: 54px;*/
+  min-width: 100px;
+  min-height: 50px;
 }
 
 button.reset {
@@ -168,7 +234,10 @@ button.reset {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  padding: 90px 110px;
+  /*padding: 90px 110px;*/
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .img-tick {
