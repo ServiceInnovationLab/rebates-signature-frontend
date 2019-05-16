@@ -54,9 +54,7 @@ const DeclarationApplicant = (props) => {
 const DeclarationWitness = (props) => {
     return (
         <p className="signatureSection">
-            Declared at <b>{props.data.location}</b> this <b>{props.data.day}</b>
-            of <b>{props.data.month}</b> <b>{props.data.year}</b> before me,
-            <b>{props.data.witnessName}</b> <b>({props.data.witnessTitle})</b>.
+            Declared at <b>{props.data.location}</b> this <b>{props.data.day}</b> of <b>{props.data.month}</b> <b>{props.data.year}</b> before me, <b>{props.data.witnessName}</b> <b>({props.data.witnessTitle})</b>.
         </p>
     )
 }
