@@ -26,7 +26,7 @@ export const Signature = (props) => {
                 </div>
             </div>
 
-            <div className="text-content">
+            <div className="text-content fade-in">
                 <h1>{props.title}</h1>
                 <p className="summary">{props.subheading}</p>
 

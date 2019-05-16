@@ -82,7 +82,7 @@ export const ApplicationSummary = (props) => {
                     } else {
                         dispatch({type: 'FETCHED_APPLICATION', data: result});
                     }
-                }, 4000);
+                }, 1000);
             } catch (error) {
                 dispatch({type: 'FETCHING_APPLICATION_ERROR'});
             }
@@ -95,44 +95,36 @@ export const ApplicationSummary = (props) => {
         <>
             {state.fetchingApplication && <Preloader />}
 
-            <div className="controlsBackground">
-                <div className="controls">
-                    {state.fetchingApplicationError &&
-                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
-                    }
-
-                    {state.fetchedApplication &&
-                    <button className='next' name="startOver"
-                            onClick={() => props.onFetchedApplication(state.data)}>NEXT</button>
-                    }
-                </div>
-            </div>
-            <div className="text-content">
-                {state.fetchedApplication &&
-                <div className="fade-in">
-                    <h1>Application Summary</h1>
-                    <h2>{props.title}{state.data.rebateClaim}</h2>
-
-                    Application fetched
-                    <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.
+            {state.fetchingApplicationError &&
+                <div className="text-content fade-in">
+                    <p className="system-msg system-msg--error">
+                        Unfortunately an error occurred while retrieving this application, please try again.
                     </p>
-
-                    <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July 2018.
-                        I have not moved within this rating year.</p>
-
-                    <p>My 2018/2019 rates bill (including water) is <strong>${state.data.ratesBill}</strong>.</p>
-
-                    <p>I have <strong>{state.data.noOfDependants}</strong> dependant(s).</p>
-
-                    <p>The combined income of myself and my [partner or joint home owner] living with me
-                        on 1 July 2018 for the 2017/2018 tax year was <strong>${state.data.combinedIncome}</strong>.</p>
+                  <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
                 </div>
-                }
+            }
 
-                {state.fetchingApplicationError &&
-                    <p className="system-msg system-msg--error">Error while fetching application...</p>
-                }
-            </div>
+            {state.fetchedApplication &&
+            <div className="text-content fade-in">
+                <h1>Application Summary</h1>
+                <h2>{props.title}{state.data.rebateClaim}</h2>
+
+                <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.
+                </p>
+
+                <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July 2018.
+                    I have not moved within this rating year.</p>
+
+                <p>My 2018/2019 rates bill (including water) is <strong>${state.data.ratesBill}</strong>.</p>
+
+                <p>I have <strong>{state.data.noOfDependants === 0 ? 'no' : state.data.noOfDependants}</strong> dependant(s).</p>
+
+                <p>The combined income of myself and my [partner or joint home owner] living with me
+                    on 1 July 2018 for the 2017/2018 tax year was <strong>${state.data.combinedIncome}</strong>.</p>
+
+                <button className='next' name="startOver"
+                        onClick={() => props.onFetchedApplication(state.data)}>CONFIRM</button>
+            </div>}
         </>
     )
 };
