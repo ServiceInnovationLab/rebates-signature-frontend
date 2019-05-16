@@ -1,32 +1,20 @@
 
 .debug {
-  display: none;
+  display: block; /* none */
 }
 
 div {
-  /*border: 2px solid red;*/
+  /* border: 2px solid red; */
 }
 
-.sigCanvas {
-  touch-action: none;
-  margin: 20px 0;
-  display: block;
-  flex: 1;
-  background-color: white;
-  border: 1px solid black;
-  //width: 100%;
+header {
+  padding: 0 1rem;
+  background: black;
+  color: white;
 }
 
-
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  /*overflow: hidden;*/
-  font-family: "Fira", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-size: 18px;
-  color: #000;
+h1 {
+  margin: 1rem 0 0 0;
 }
 
 #root {
@@ -39,27 +27,64 @@ body {
   display: flex;
   flex: 1;
   flex-direction: column;
+  max-width: 100%;
+  height: auto;
+  border: 2px solid red;
+}
+
+.text-content {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 0 50px;
 }
 
 .content {
   display: flex;
   flex: 1;
   flex-direction: column;
+  height: 100%;
 }
 
-.content2 {
+body {
   display: flex;
-  flex: 1;
   flex-direction: column;
+  height: 100vh;
+  /*overflow: hidden;*/
+  font-family: "Fira", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000;
 }
 
-.test-content{
-  flex: 1 0 auto;
-  padding: 0 50px;
+.controlsBackground {
+  background-color: #efefef;
 }
 
 .controls {
-  margin: 25px 50px
+  margin: 1rem 3rem; /* 25px 50px */
+}
+
+.signatureSection {
+  margin: 0;
+}
+
+.signature {
+  flex: 1;
+}
+
+.signature div {
+  flex: 1;
+}
+
+.sigCanvas {
+  touch-action: none;
+  margin: .75rem auto;
+  display: block;
+  flex: 1;
+  background-color: white;
+  border: 1px solid black;
+  height: 18rem;
 }
 
 .sign-applicant {
@@ -67,7 +92,26 @@ body {
   flex-direction: column;
   flex: 1;
   background-color: #efefef;
-  padding: 15px 60px;
+  padding: 15px 25px;
+  height: auto;
+}
+
+button.start {
+  background-color: #369;
+  color: #fff !important;
+  border: 1px solid #247;
+  border-radius: 5px;
+  text-decoration: none;
+  position: absolute;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 16px;
+  min-height: 42px;
+  min-width: 20px;
+  display: inline-block;
+  min-height: 54px;
+  top: 50%;
+  left: 50%;
 }
 
 button.next {
@@ -81,15 +125,15 @@ button.next {
   font-size: 16px;
   line-height: 16px;
   min-height: 42px;
-  min-width: 200px;
-  display: inline-block;
+  min-width: 150px;
+  /* display: inline-block; */
   min-height: 54px;
-  float:right;
+  float: right;
 }
 
 button.back {
   background-color: #eee;
-  color: #0 !important;
+  color: #000 !important;
   border: 1px solid black;
   border-radius: 5px;
   text-decoration: none;
@@ -97,39 +141,126 @@ button.back {
   padding: 12px;
   font-size: 16px;
   line-height: 16px;
-  min-width: 200px;
+  min-width: 150px;
   display: inline-block;
   min-height: 54px;
 }
 
-header {
-  padding: 50px;
-  background: black;
+button.reset {
+  background-color: #369;
+  color: #fff !important;
+  border: 1px solid #247;
+  border-radius: 5px;
+  text-decoration: none;
+  position: absolute;
+  padding: 12px;
+  font-size: 16px;
+  line-height: 16px;
+  min-height: 42px;
+  min-width: 20px;
+  display: inline-block;
+  min-height: 54px;
+  top: 12.25%;
+  right: 5%;
 }
 
+.endScreen {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 90px 110px;
+}
 
-@media all and (max-width: 400px) {
-  header {
-    padding: 5px;
+.img-tick {
+  max-width: 15rem;
+  max-height: 15rem;
+  left: 20rem;
+  top: 8rem;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 0 50px;
+  position: relative;
+  top: 10%;
+  left: 27%;
+}
+
+@media only screen 
+and (min-device-width : 1025px) 
+and (max-device-width : 1366px) 
+and (orientation : landscape)
+/* and (-webkit-min-device-pixel-ratio: 2) */
+{
+  p {
+    font-size: 1.5rem;
+  }
+  .text-content {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    padding: 20px 100px;
   }
 
-  h1 {
-    margin-block-start: 0;
+  .signatureSection {
+    margin: 0;
   }
-  .content {
-    margin: 0 10px;
+  
+  .sigCanvas {
+    touch-action: none;
+    margin: .75rem auto;
+    display: block;
+    flex: 1;
+    background-color: white;
+    border: 1px solid black;
+    height: 28rem;
   }
-
-  button {
-    min-width: inherit !important;
-  }
-
-  .test-content {
-    padding: 0;
-  }
-
+  
   .sign-applicant {
-    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: #efefef;
+    padding: 15px 25px;
+    height: auto;
   }
-}
 
+  .endScreen {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    padding: 150px 281px;
+  }
+
+  button.reset {
+    background-color: #369;
+    color: #fff !important;
+    border: 1px solid #247;
+    border-radius: 5px;
+    text-decoration: none;
+    position: absolute;
+    padding: 12px;
+    font-size: 16px;
+    line-height: 16px;
+    min-height: 42px;
+    min-width: 20px;
+    display: inline-block;
+    min-height: 54px;
+    top: 9.25%;
+    right: 4%;
+  }
+
+  .img-tick {
+    max-width: 15rem;
+    max-height: 15rem;
+    left: 20rem;
+    top: 8rem;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    padding: 0 50px;
+    position: relative;
+    top: 20%;
+    left: 30%;
+  }
+
+}
