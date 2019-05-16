@@ -48,27 +48,11 @@ export const SignatureSubmitter = (props) => {
             dispatch({type: 'SUBMITTING_SIGNATURES'});
 
             try {
-                let result = {
-                    name: 'Jan Janssen',
-                    occupationStatus: 'retired',
-                    address: '191 Thorndon Quay, Wellington 6011',
-                    ratesBill: 3749.52,
-                    noOfDependants: 0,
-                    combinedIncome: 21484.32,
-                    rebateClaim: 450,
-                    location: 'Tauranga City Council',
-                    day: 'Monday',
-                    month: 'June',
-                    year: 2019,
-                    witnessName: 'Brian Brake',
-                    witnessTitle: 'Council Officer'
-                };
-
                 setTimeout(() => {
                     if (state.retryCount < 1) {
                         dispatch({type: 'SUBMITTING_SIGNATURES_ERROR'});
                     } else {
-                        dispatch({type: 'SUBMITTED_SIGNATURES', data: result});
+                        dispatch({type: 'SUBMITTED_SIGNATURES'});
                         props.onSubmitted();
                     }
                 }, 2000);
