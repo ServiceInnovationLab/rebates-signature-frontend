@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 
 export const Signature = (props) => {
+    const [ error, setError ] = useState(false);
     let sigCanvas = null;
+
+    const onNext = () => {
+        if (sigCanvas.isEmpty()) {
+            setError(true);
+        } else {
+            setError(false);
+            props.next({signature: sigCanvas.toDataURL()});
+        }
+    };
 
     return (
         <>
@@ -12,18 +22,18 @@ export const Signature = (props) => {
                     <button
                         className='next'
                         name="sign"
-                        onClick={() => props.next({signature: sigCanvas.toDataURL()})}>{props.nextButtonLabel}</button>
+                        onClick={onNext}>{props.nextButtonLabel}</button>
                 </div>
             </div>
 
             <div className="text-content">
                 <h1>{props.title}</h1>
-                <p class="summary">{props.subheading}</p>
+                <p className="summary">{props.subheading}</p>
 
                 <div className='signature'>
                     <div className="wrap-signature">
                         {/* todo JUAN - hardcoded error state below  */}
-                        <p className="signature-error">Please sign before you proceed</p>
+                        { error && <p className="signature-error">Please sign before you proceed</p>}
 
                         <SignatureCanvas
                             ref={(ref) => {
@@ -31,6 +41,7 @@ export const Signature = (props) => {
                             }}
                             penColor='green'
                             canvasProps={{width: '750px', height: '240px', className: 'sigCanvas'}}
+                            onBegin={() => setError(false)}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.data}/>}
