@@ -7,6 +7,10 @@ body{
   line-height: 1.5;
 }
 
+p{
+  margin-top: 0;
+}
+
 div {
   /* border: 2px solid red; */
 }
@@ -25,9 +29,41 @@ h1 {
 
 p.summary {
   font-size: 26px;
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 0;
 }
+
+p.system-msg {
+  margin: 1em;
+  padding: .5em;
+}
+
+p.system-msg.system-msg--processing {
+  border-left: 3px solid green;
+}
+
+
+p.system-msg.system-msg--error{
+  border-left: 3px solid #b10e1e;
+}
+
+
+p.signature-error {
+  color: #b10e1e;
+  font-weight: bold; /* todo fira bold */
+  font-size: 18px;
+  padding-left: 22px;
+}
+
+p.signature-error:before{
+  content: '';
+  border-right: 3px solid #b10e1e;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
 
 #root {
   display: flex;
@@ -41,7 +77,6 @@ p.summary {
   flex-direction: column;
   max-width: 100%;
   height: auto;
-  /*border: 2px solid red;*/
 }
 
 .text-content {
@@ -77,6 +112,7 @@ body {
 
 .controlsBackground {
   background-color: #EBEBEB;
+  min-height: 82px;
 }
 
 .controls {
@@ -97,6 +133,11 @@ body {
   flex: 1;
 }
 
+.wrap-signature {
+  margin-top: 50px;
+  position: relative; /* contain error msg */
+}
+
 .signature div {
   flex: 1;
 }
@@ -107,8 +148,8 @@ body {
   display: block;
   flex: 1;
   background-color: white;
-  border-bottom: 1px solid #ABABAB; /* todo confirm color with Karyn */
-  height: 18rem;
+  border-bottom: 1px solid #ABABAB;
+  /*height: 18rem;*/
 }
 
 .sign-applicant {
@@ -193,7 +234,10 @@ button.reset {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  padding: 90px 110px;
+  /*padding: 90px 110px;*/
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .img-tick {

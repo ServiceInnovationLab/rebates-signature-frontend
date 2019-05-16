@@ -21,13 +21,16 @@ export const Signature = (props) => {
                 <p class="summary">{props.subheading}</p>
 
                 <div className='signature'>
-                    <div>
+                    <div className="wrap-signature">
+                        {/* todo JUAN - hardcoded error state below  */}
+                        <p className="signature-error">Please sign before you proceed</p>
+
                         <SignatureCanvas
                             ref={(ref) => {
                                 sigCanvas = ref;
                             }}
                             penColor='green'
-                            canvasProps={{width: 1500, className: 'sigCanvas'}}
+                            canvasProps={{width: '750px', height: '240px', className: 'sigCanvas'}}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.data}/>}
