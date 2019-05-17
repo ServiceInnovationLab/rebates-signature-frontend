@@ -5,7 +5,8 @@ export const appReducer = (state, action) => {
             return {
                 ...state,
                 token: action.token,
-            }
+                currentScreen: 'FETCH-APPLICATION',
+            };
         case 'FETCHED_APPLICATION':
             return {
                 ...state,

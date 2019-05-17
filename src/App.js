@@ -11,12 +11,12 @@ import tick from './images/tick.svg';
 
 function App() {
     const initialState = {
-        currentScreen: 'FETCH-APPLICATION'
+        currentScreen: 'UNDEFINED'
     };
     const [state, dispatch] = useReducer(appReducer, initialState);
 
     useEffect(() => {
-        var urlParams = new URLSearchParams(window.location.search);
+        let urlParams = new URLSearchParams(window.location.search);
         dispatch({type: 'RECEIVED_TOKEN', token: urlParams.get('t')})
     }, []);
 
@@ -30,7 +30,6 @@ function App() {
                 {state.currentScreen === 'FETCH-APPLICATION' &&
                 <ApplicationSummary
                     token={state.token}
-                    title="Please check these details for your rebate claim of $"
                     onCancel={() => dispatch({type: 'RESET'})}
                     onFetchedApplication={(applicationData) => dispatch({
                         type: 'FETCHED_APPLICATION',
@@ -70,7 +69,9 @@ function App() {
                 {state.currentScreen === 'THANK-YOU' &&
                 <div className="endScreen">
                     <h1>Thank you</h1>
-                    <p className="summary">This declaration is now complete and ready to be processed.</p>
+                    <p className="summary">
+                        This declaration is now complete and ready to be processed.
+                    </p>
                     <img src={tick} alt="tick" className="img-tick"></img>
                 </div>}
             </div>

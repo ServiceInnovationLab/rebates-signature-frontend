@@ -1,0 +1,32 @@
+POST
+
+http://localhost:3000/api/v1/rebate_forms/sign
+
+{
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJyZWJhdGVfZm9ybV9pZCI6MSwiZXhwIjoxNTU4MTAxMDM5LCJwZXIiOiJmZXRjaF9hcHBsaWNhdGlvbl9hbmRfc3VibWl0X3NpZ25hdHVyZXMifQ.sQKKh4yh_RE1dlkzLOfU8JVxcE2g1lJAM3mUr0abO3c",
+        "signatures": [
+            {
+                "image": "imageeo",
+                "name": "namerrr",
+                "role": "the best",
+                "type": "applicant"
+            },
+            {
+                "image": "i2mageeo",
+                "name": "n2amerrr",
+                "type": "witness",
+                "role": "t2he best"
+            }
+        ]
+    }
+
+}
+
+
+
+GET
+
+http://localhost:3000/api/v1/rebate_forms/?jwt=eyJhbGciOiJIUzI1NiJ9.eyJyZWJhdGVfZm9ybV9pZCI6MSwiZXhwIjoxNTU4MTAxMDM5LCJwZXIiOiJmZXRjaF9hcHBsaWNhdGlvbl9hbmRfc3VibWl0X3NpZ25hdHVyZXMifQ.sQKKh4yh_RE1dlkzLOfU8JVxcE2g1lJAM3mUr0abO3c
+
+

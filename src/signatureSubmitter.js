@@ -1,5 +1,6 @@
 import React from 'react';
 import {useReducer, useEffect} from 'react';
+import axios from 'axios';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -39,30 +40,48 @@ export const SignatureSubmitter = (props) => {
         submittingSignatures: false,
         signaturesSubmitted: false,
         submittingSignaturesError: false,
-        retryCount: 0
+        retryCount: 0,
+        token: props.token,
     };
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const submitData = async () => {
+        const submitData = async (token) => {
             dispatch({type: 'SUBMITTING_SIGNATURES'});
 
             try {
-                setTimeout(() => {
-                    if (state.retryCount < 1) {
-                        dispatch({type: 'SUBMITTING_SIGNATURES_ERROR'});
-                    } else {
-                        dispatch({type: 'SUBMITTED_SIGNATURES'});
-                        props.onSubmitted();
-                    }
-                }, 2000);
+                let data = props.data;
+                let request = {
+                    "token": `${token}`,
+                    "signatures": [
+                        {
+                            "image": data.signatureApplicant,
+                            "name": data.name,
+                            "role": data.occupationStatus,
+                            "type": "applicant"
+                        },
+                        {
+                            "image": data.signatureWitness,
+                            "name": data.witnessName,
+                            "role": data.witnessTitle,
+                            "type": "witness"
+                        }
+                    ]
+                };
+
+                let result = await axios.post(`/api/v1/rebate_forms/sign`, request);
+                let { response } = await result.data;
+                dispatch({type: 'SUBMITTED_SIGNATURES'});
+                props.onSubmitted();
+
+                console.log(response);
             } catch (error) {
                 dispatch({type: 'SUBMITTING_SIGNATURES_ERROR'});
             }
         };
 
-        submitData();
-    }, [props, state.retryCount]);
+        submitData(props.token);
+    }, [props.token, state.retryCount]);
 
     return (
         <>
