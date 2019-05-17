@@ -72,7 +72,7 @@ function App() {
                 {state.currentScreen === 'THANK-YOU' &&
                 <div className="endScreen">
                     <h1>Thank you</h1>
-                    <h2>This declaration is now complete and ready to be processed.</h2>
+                    <p className="summary">This declaration is now complete and ready to be processed.</p>
                     <img src={tick} alt="tick" className="img-tick"></img>
                 </div>}
             </div>

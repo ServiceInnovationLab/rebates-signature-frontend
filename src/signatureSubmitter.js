@@ -92,7 +92,7 @@ export const SignatureSubmitter = (props) => {
 
             <div className="text-content">
                 {state.submittingSignatures &&
-                <div>Submitting signatures...</div>
+                <p className="system-msg system-msg--processing">Submitting signatures...</p>
                 }
 
                 {state.signaturesSubmitted &&
@@ -103,7 +103,7 @@ export const SignatureSubmitter = (props) => {
 
                 {state.submittingSignaturesError &&
                 <div>
-                    <div>Error while submitting signatures, please try again...</div>
+                    <p className="system-msg system-msg--error">Error while submitting signatures, please try again...</p>
                 </div>
                 }
             </div>
