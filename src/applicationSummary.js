@@ -96,9 +96,9 @@ export const ApplicationSummary = (props) => {
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    {state.fetchingApplicationError &&
-                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
-                    }
+                    {/*{state.fetchingApplicationError &&*/}
+                    {/*/!*<button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>*!/*/}
+                    {/*}*/}
 
                     {state.fetchedApplication &&
                     <button className='next' name="startOver"
@@ -110,7 +110,7 @@ export const ApplicationSummary = (props) => {
                 {state.fetchedApplication &&
                 <>
                     <h1>Application Summary</h1>
-                    <h2>{props.title}{state.data.rebateClaim}</h2>
+                    <p className="summary">{props.title}{state.data.rebateClaim}</p>
 
                     <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.
                     </p>
@@ -136,11 +136,31 @@ export const ApplicationSummary = (props) => {
                 }
 
                 {state.fetchingApplication &&
-                <p className="system-msg system-msg--processing">Fetching application...</p>
+                <div className="wrap-system-msg">
+                    <p className="system-msg system-msg--processing">Fetching application...</p>
+                    <div className="sk-fading-circle">
+                        <div className="sk-circle1 sk-circle"></div>
+                        <div className="sk-circle2 sk-circle"></div>
+                        <div className="sk-circle3 sk-circle"></div>
+                        <div className="sk-circle4 sk-circle"></div>
+                        <div className="sk-circle5 sk-circle"></div>
+                        <div className="sk-circle6 sk-circle"></div>
+                        <div className="sk-circle7 sk-circle"></div>
+                        <div className="sk-circle8 sk-circle"></div>
+                        <div className="sk-circle9 sk-circle"></div>
+                        <div className="sk-circle10 sk-circle"></div>
+                        <div className="sk-circle11 sk-circle"></div>
+                        <div className="sk-circle12 sk-circle"></div>
+                    </div>
+                </div>
+
                 }
 
                 {state.fetchingApplicationError &&
-                    <p className="system-msg system-msg--error">Error while fetching application...</p>
+                <div className="wrap-system-msg">
+                    <p className="system-msg system-msg--error">Error while fetching application</p>
+                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>Try Again</button>
+                </div>
                 }
             </div>
         </>
