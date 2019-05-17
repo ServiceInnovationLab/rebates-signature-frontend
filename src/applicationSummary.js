@@ -64,14 +64,17 @@ export const ApplicationSummary = (props) => {
                     address: '191 Thorndon Quay, Wellington 6011',
                     ratesBill: 3749.52,
                     noOfDependants: 0,
+                    singleIncome: 1050,
                     combinedIncome: 21484.32,
                     rebateClaim: 450,
                     location: 'Tauranga City Council',
                     day: 'Monday',
                     month: 'June',
-                    year: 2019,
+                    year: 2018,
                     witnessName: 'Brian Brake',
-                    witnessTitle: 'Council Officer'
+                    witnessTitle: 'Council Officer',
+                    taxYear: '2018/2019',
+                    partner: true
                 };
 
                 setTimeout(() => {
@@ -109,19 +112,26 @@ export const ApplicationSummary = (props) => {
                     <h1>Application Summary</h1>
                     <h2>{props.title}{state.data.rebateClaim}</h2>
 
-                    Application fetched
                     <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.
                     </p>
 
-                    <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July 2018.
+                    <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July {state.data.year}.
                         I have not moved within this rating year.</p>
 
-                    <p>My 2018/2019 rates bill (including water) is <strong>${state.data.ratesBill}</strong>.</p>
+                    <p>My {state.data.taxYear} rates bill (including water) is <strong>${state.data.ratesBill}</strong>.</p>
 
                     <p>I have <strong>{state.data.noOfDependants}</strong> dependant(s).</p>
 
-                    <p>The combined income of myself and my [partner or joint home owner] living with me
-                        on 1 July 2018 for the 2017/2018 tax year was <strong>${state.data.combinedIncome}</strong>.</p>
+                    {!state.data.partner &&
+                    <p>
+                        The combined income of myself and my [partner or joint home owner] living with me
+                        on 1 July {state.data.year} for the {state.data.taxYear} tax year was <strong>${state.data.combinedIncome}</strong>.
+                    </p>
+                    }
+
+                    {state.data.partner &&
+                    <p>My income for the {state.data.taxYear} tax year was <strong>${state.data.singleIncome}</strong>.</p>
+                    }
                 </>
                 }
 

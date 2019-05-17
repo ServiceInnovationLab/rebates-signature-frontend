@@ -56,10 +56,8 @@ const DeclarationApplicant = (props) => {
         <p className="signatureSection">
             I, <strong>{props.data.name}</strong> of <strong>{props.data.address}</strong>,
             occupation <strong>{props.data.occupationStatus}</strong> solemnly and sincerely declare that I believe the
-            information
-            I have given on this form is true and correct, and I make this solemn declaration conscientiously believing
-            the
-            same to be true and virtue of the Oaths and Declarations Act 1957.
+            information I have given on this form is true and correct, and I make this solemn declaration
+            conscientiously believing the same to be true and virtue of the Oaths and Declarations Act 1957.
         </p>
     )
 }
