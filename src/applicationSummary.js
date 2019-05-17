@@ -100,7 +100,9 @@ export const ApplicationSummary = (props) => {
             </div>
             <div className="text-content">
                 {state.fetchedApplication &&
-                <div>
+                <>
+                    <h1>Application Summary</h1>
+
                     <p>My name is <strong>{state.data.name}</strong> and my occupation is <strong>{state.data.occupationStatus}</strong>.</p>
 
                     <p>My address is <strong>{state.data.address}</strong> and I lived here on 1 July {state.data.year}. 
@@ -118,7 +120,7 @@ export const ApplicationSummary = (props) => {
                     {state.data.partner &&
                     <p>My income for the {state.data.taxYear} tax year was <strong>${state.data.singleIncome}</strong>.</p>
                     }
-             </div>
+                </>
                 }
 
                 {state.fetchingApplicationError &&
