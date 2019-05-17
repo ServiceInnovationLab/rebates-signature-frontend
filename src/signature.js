@@ -30,7 +30,7 @@ export const Signature = (props) => {
                                 sigCanvas = ref;
                             }}
                             penColor='green'
-                            canvasProps={{width: '750px', height: '240px', className: 'sigCanvas'}}
+                            canvasProps={{width: '750px', height: '200px', className: 'sigCanvas'}}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.data}/>}

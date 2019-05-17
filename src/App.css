@@ -47,18 +47,28 @@ p.summary {
   margin-bottom: 0;
 }
 
+
+.wrap-system-msg {
+  text-align: center; /* center Retry <button> */
+}
+
 p.system-msg {
-  margin: 1em;
-  padding: .5em;
+  margin: 50px auto;
+  padding: 20px;
+  border: 4px solid white;
+  max-width: 500px;
+
 }
 
 p.system-msg.system-msg--processing {
-  border-left: 3px solid green;
+
+
 }
 
 
 p.system-msg.system-msg--error{
-  border-left: 3px solid #b10e1e;
+  color: #b10e1e;
+  border-color: #b10e1e;
 }
 
 
@@ -191,8 +201,16 @@ button {
 button.next {
   background-color: #369;
   border: 1px solid #247;
-  float: right;
 }
+
+.controls button.next {
+  float: right
+}
+
+.content button.next {
+}
+
+
 
 button.back {
   background-color: #eee;
@@ -224,7 +242,8 @@ button.back {
   left: 27%;
 }
 
-/* Fonts */
+/* Fonts
+=============================== */
 @font-face {
   font-family: 'Fira';
   src: url("fonts/FiraSans-Regular.eot");
@@ -241,10 +260,27 @@ button.back {
   url("fonts/FiraSans-Bold.ttf") format("truetype");
 }
 
+/* Animations
+=============================== */
+
+/* Screen transition animation */
+.text-content,
+.endScreen {
+  animation: fadein .5s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 /* Spinner animation */
 .sk-fading-circle {
-  margin: 100px auto;
+  margin: 0 auto;
   width: 90px;
   height: 90px;
   position: relative;

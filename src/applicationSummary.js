@@ -93,9 +93,9 @@ export const ApplicationSummary = (props) => {
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    {state.fetchingApplicationError &&
-                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
-                    }
+                    {/*{state.fetchingApplicationError &&*/}
+                    {/*/!*<button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>*!/*/}
+                    {/*}*/}
 
                     {state.fetchedApplication &&
                     <button className='next' name="startOver"
@@ -126,7 +126,7 @@ export const ApplicationSummary = (props) => {
                 }
 
                 {state.fetchingApplication &&
-                <div>
+                <div className="wrap-system-msg">
                     <p className="system-msg system-msg--processing">Fetching application...</p>
                     <div className="sk-fading-circle">
                         <div className="sk-circle1 sk-circle"></div>
@@ -147,24 +147,10 @@ export const ApplicationSummary = (props) => {
                 }
 
                 {state.fetchingApplicationError &&
-                    <div>
-                        <p className="system-msg system-msg--error">Error while fetching application...</p>
-                        <div className="sk-fading-circle">
-                            <div className="sk-circle1 sk-circle"></div>
-                            <div className="sk-circle2 sk-circle"></div>
-                            <div className="sk-circle3 sk-circle"></div>
-                            <div className="sk-circle4 sk-circle"></div>
-                            <div className="sk-circle5 sk-circle"></div>
-                            <div className="sk-circle6 sk-circle"></div>
-                            <div className="sk-circle7 sk-circle"></div>
-                            <div className="sk-circle8 sk-circle"></div>
-                            <div className="sk-circle9 sk-circle"></div>
-                            <div className="sk-circle10 sk-circle"></div>
-                            <div className="sk-circle11 sk-circle"></div>
-                            <div className="sk-circle12 sk-circle"></div>
-                        </div>
-                        {/*<div className="spinner"><img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDQgNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1LjU0MiAxLjQ4N0EyMS41MDcgMjEuNTA3IDAgMCAwIC41IDIyYzAgMTEuODc0IDkuNjI2IDIxLjUgMjEuNSAyMS41IDkuODQ3IDAgMTguMzY0LTYuNjc1IDIwLjgwOS0xNi4wNzJhMS41IDEuNSAwIDAgMC0yLjkwNC0uNzU2QzM3LjgwMyAzNC43NTUgMzAuNDczIDQwLjUgMjIgNDAuNSAxMS43ODMgNDAuNSAzLjUgMzIuMjE3IDMuNSAyMmMwLTguMTM3IDUuMy0xNS4yNDcgMTIuOTQyLTE3LjY1YTEuNSAxLjUgMCAxIDAtLjktMi44NjN6IiBmaWxsPSIjOTE5RUFCIi8+PC9zdmc+Cg==" alt="" className="Polaris-Spinner Polaris-Spinner--colorTeal Polaris-Spinner--sizeLarge" draggable="false" role="status" /></div>*/}
-                    </div>
+                <div className="wrap-system-msg">
+                    <p className="system-msg system-msg--error">Error while fetching application</p>
+                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>Try Again</button>
+                </div>
                 }
             </div>
         </>
