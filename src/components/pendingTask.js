@@ -1,5 +1,7 @@
 import React from 'react';
 import {Spinner} from "./spinner";
+import PropTypes from "prop-types";
+import {ApplicationSummary} from "./applicationSummary";
 
 export const PendingTask = (props) => {
 
@@ -17,4 +19,12 @@ export const PendingTask = (props) => {
             </div>}
         </>
     );
+};
+
+PendingTask.propTypes = {
+    application: PropTypes.shape({
+        task: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        errorTitle: PropTypes.string.isRequired,
+    })
 };

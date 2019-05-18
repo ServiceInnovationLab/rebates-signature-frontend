@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const ApplicationSummary = (props) => {
     let {
@@ -48,4 +49,20 @@ export const ApplicationSummary = (props) => {
             </div>
         </>
     )
+};
+
+ApplicationSummary.propTypes = {
+    application: PropTypes.shape({
+        full_name: PropTypes.string.isRequired,
+        occupationStatus: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        ratingYear: PropTypes.string.isRequired,
+        taxYear: PropTypes.string.isRequired,
+        ratesBill: PropTypes.string.isRequired,
+        noOfDependants: PropTypes.string.isRequired,
+        partner: PropTypes.bool.isRequired,
+        combinedIncome: PropTypes.number.isRequired,
+        singleIncome: PropTypes.number.isRequired,
+        rebateClaim: PropTypes.string.isRequired,
+    })
 };

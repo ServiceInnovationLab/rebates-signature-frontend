@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
+import PropTypes from "prop-types";
+import {PendingTask} from "./pendingTask";
 
 export const Signature = (props) => {
     const [ error, setError ] = useState(false);
@@ -72,4 +74,17 @@ const DeclarationWitness = (props) => {
             <strong>{date}</strong> before me <strong>{props.data.witnessName}</strong>, <strong>{props.data.witnessOccupation}</strong>.
         </p>
     )
+};
+
+Signature.propTypes = {
+    title: PropTypes.string.isRequired,
+    declaration: PropTypes.string.isRequired,
+    application: PropTypes.shape({
+        full_name: PropTypes.string.isRequired,
+        address: PropTypes.string.isRequired,
+        occupationStatus: PropTypes.string.isRequired,
+        witnessLocation: PropTypes.string.isRequired,
+        witnessName: PropTypes.string.isRequired,
+        witnessOccupation: PropTypes.string.isRequired,
+    })
 };

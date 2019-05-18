@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import PropTypes from "prop-types";
 
 export const Spinner = (props) => {
     return (
@@ -23,3 +24,6 @@ export const Spinner = (props) => {
     );
 };
 
+Spinner.propTypes = {
+    message: PropTypes.string.isRequired,
+};
