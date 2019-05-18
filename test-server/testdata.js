@@ -5,7 +5,7 @@ module.exports.application = {
         "type": "rebate_forms",
         "attributes": {
             "valuation_id": "XF9WADUR1MD8D41LM",
-            "token": "e5e1147a2800aa243285b856b3e84f2e15d32de08930bc2a3f1f9a2437af698177d4d1298f0ff36470c0a053fcc47afd12",
+            "token": "",
             "rebate": "620.0",
             "fields": {
                 "full_name": "Johnny Nullableee",
