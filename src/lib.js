@@ -67,12 +67,10 @@ export const usePendingFetch = (func, deps) => {
             dispatch({type: 'ready', start});
         }
 
-        const cleanup = () => {
+        return () => {
             dispatch({ type: 'init' });
             mounted = false;
         };
-
-        return cleanup;
     }, deps);
 
     return state;
@@ -87,10 +85,8 @@ export const useAsyncRun = (asyncTask, onResult) => {
             start();
         }
 
-        const cleanup = () => {
+        return () => {
         };
-
-        return cleanup;
     }, [start]);
 
     useEffect(() => {

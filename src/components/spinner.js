@@ -21,5 +21,5 @@ export const Spinner = (props) => {
             </div>
         </div>
     );
-}
+};
 

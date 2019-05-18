@@ -60,10 +60,10 @@ const DeclarationApplicant = (props) => {
             conscientiously believing the same to be true and virtue of the Oaths and Declarations Act 1957.
         </p>
     )
-}
+};
 
 const DeclarationWitness = (props) => {
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     let date = new Date().toLocaleDateString('en-NZ', options);
 
     return (
@@ -72,4 +72,4 @@ const DeclarationWitness = (props) => {
             <strong>{date}</strong> before me <strong>{props.data.witnessName}</strong>, <strong>{props.data.witnessOccupation}</strong>.
         </p>
     )
-}
+};

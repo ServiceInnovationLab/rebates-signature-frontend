@@ -1,8 +1,3 @@
-
-.debug {
-  display: block; /* none */
-}
-
 body{
   line-height: 1.5;
 }
@@ -175,15 +170,6 @@ body {
   /*height: 18rem;*/
 }
 
-.sign-applicant {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-color: #efefef;
-  padding: 15px 25px;
-  height: auto;
-}
-
 button {
   font-family: "Fira", Helvetica, Arial, sans-serif;
   font-weight: normal;
@@ -231,8 +217,6 @@ button.back {
 .img-tick {
   max-width: 15rem;
   max-height: 15rem;
-  left: 20rem;
-  top: 8rem;
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
