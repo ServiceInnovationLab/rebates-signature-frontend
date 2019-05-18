@@ -1,24 +1,32 @@
 import React from 'react';
 import {useReducer, useEffect} from 'react';
 
-import './App.css';
-import {appReducer} from './appReducer';
-import {SignatureSubmitter} from "./signatureSubmitter";
-import {ApplicationSummary} from "./applicationSummary";
+import {ApplicationSummary} from "./components/applicationSummary";
+import {Signature} from "./components/signature";
+import {PendingTask} from "./components/pendingTask";
 
-import {Signature} from "./signature";
+import {appReducer} from './appReducer';
+import {useFetchApplication, useSubmitApplication} from './services';
+
+import './App.css';
 import tick from './images/tick.svg';
 
 function App() {
-    const initialState = {
-        currentScreen: 'UNDEFINED'
-    };
-    const [state, dispatch] = useReducer(appReducer, initialState);
+    const [state, dispatch] = useReducer(appReducer, {});
 
     useEffect(() => {
         let urlParams = new URLSearchParams(window.location.search);
-        dispatch({type: 'RECEIVED_TOKEN', token: urlParams.get('t')})
+        let token = urlParams.get('t');
+        dispatch({type: 'RECEIVED_TOKEN', token})
     }, []);
+
+    const fetchTask = useFetchApplication(state.token, () => {
+        dispatch({type: 'FETCHED_APPLICATION', application: fetchTask.result})
+    }, [state.token]);
+
+    const submitTask = useSubmitApplication(state, () => {
+        dispatch({type: 'APPLICATION_SUBMITTED'});
+    }, [state.readyToSubmit]);
 
     return (
         <div className="App">
@@ -27,21 +35,29 @@ function App() {
             </header>
 
             <div className="content">
-                {state.currentScreen === 'FETCH-APPLICATION' &&
+                <PendingTask
+                    task={fetchTask}
+                    title="Retrieving application..."
+                    errorTitle="Error while retrieving application"
+                />
+
+                <PendingTask
+                    task={submitTask}
+                    title="Submitting application..."
+                    errorTitle="Error while submitting application"
+                />
+
+                {state.currentScreen === 'CONFIRM-APPLICATION' &&
                 <ApplicationSummary
-                    token={state.token}
-                    onCancel={() => dispatch({type: 'RESET'})}
-                    onFetchedApplication={(applicationData) => dispatch({
-                        type: 'FETCHED_APPLICATION',
-                        applicationData
-                    })}
+                    application={state.application}
+                    onNext={() => dispatch({type: 'CONFIRMED_APPLICATION'})}
                 />}
 
                 {state.currentScreen === 'SIGN-APPLICANT' &&
                 <Signature
                     declaration="applicant"
                     nextButtonLabel="NEXT"
-                    data={state.data}
+                    application={state.application}
                     title="Applicant signature"
                     subheading="Please sign to complete your application"
                     next={(data) => dispatch({type: 'APPLICANT_SIGNED', signature: data.signature})}
@@ -51,19 +67,12 @@ function App() {
                 {state.currentScreen === 'SIGN-WITNESS' &&
                 <Signature
                     declaration="witness"
-                    data={state.data}
                     nextButtonLabel="SUBMIT"
+                    application={state.application}
                     title="Witness signature"
                     subheading="Signature of person authorised to witness this declaration"
                     next={(data) => dispatch({type: 'WITNESS_SIGNED', signature: data.signature})}
                     back={() => dispatch({type: 'CANCEL_WITNESS_SIGN'})}
-                />}
-
-                {state.currentScreen === 'SUBMIT-SIGNATURES' &&
-                <SignatureSubmitter
-                    token={state.token}
-                    data={state.data}
-                    onSubmitted={() => dispatch({type: 'APPLICATION_SUBMITTED'})}
                 />}
 
                 {state.currentScreen === 'THANK-YOU' &&
