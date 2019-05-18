@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 
 export const Signature = (props) => {
-    console.log('render signature', props);
-
     const [ error, setError ] = useState(false);
     let sigCanvas = null;
 
