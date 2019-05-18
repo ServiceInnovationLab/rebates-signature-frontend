@@ -20,8 +20,8 @@ function App() {
         dispatch({type: 'RECEIVED_TOKEN', token})
     }, []);
 
-    const fetchTask = useFetchApplication(state.token, () => {
-        dispatch({type: 'FETCHED_APPLICATION', application: fetchTask.result})
+    const fetchTask = useFetchApplication(state.token, (result) => {
+        dispatch({type: 'FETCHED_APPLICATION', application: result})
     }, [state.token]);
 
     const submitTask = useSubmitApplication(state, () => {
