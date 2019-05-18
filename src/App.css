@@ -1,13 +1,23 @@
-body{
+html {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
+body {
   line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000;
+  overflow: auto;
 }
 
-p{
+p {
   margin-top: 0;
-}
-
-div {
-  /* border: 2px solid red; */
 }
 
 header {
@@ -42,7 +52,6 @@ p.summary {
   margin-bottom: 0;
 }
 
-
 .wrap-system-msg {
   text-align: center; /* center Retry <button> */
 }
@@ -56,16 +65,12 @@ p.system-msg {
 }
 
 p.system-msg.system-msg--processing {
-
-
 }
-
 
 p.system-msg.system-msg--error{
   color: #b10e1e;
   border-color: #b10e1e;
 }
-
 
 p.signature-error {
   color: #b10e1e;
@@ -81,12 +86,6 @@ p.signature-error:before{
   left: 0;
   top: 0;
   bottom: 0;
-}
-
-#root {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
 }
 
 .App {
@@ -106,8 +105,6 @@ p.signature-error:before{
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
-
-
 }
 
 .content {
@@ -115,17 +112,6 @@ p.signature-error:before{
   flex: 1;
   flex-direction: column;
   height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  /*overflow: hidden;*/
-  font-family: "Fira", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-size: 18px;
-  color: #000;
 }
 
 .controlsBackground {
@@ -189,6 +175,12 @@ button.next {
   border: 1px solid #247;
 }
 
+button.back {
+  background-color: #eee;
+  color: #000 !important;
+  border: 1px solid black;
+}
+
 .controls button.next {
   float: right
 }
@@ -196,19 +188,10 @@ button.next {
 .content button.next {
 }
 
-
-
-button.back {
-  background-color: #eee;
-  color: #000 !important;
-  border: 1px solid black;
-}
-
 .endScreen {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  /*padding: 90px 110px;*/
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
