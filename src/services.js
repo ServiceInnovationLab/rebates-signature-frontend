@@ -8,15 +8,14 @@ export const useFetchApplication = (token, onResult, deps) => {
 
         return {
             full_name: json.data.attributes.fields.full_name,
-            occupationStatus: json.data.attributes.fields.occupation,
+            occupation: json.data.attributes.fields.occupation,
             address: json.data.attributes.fields.location,
             ratingYear: 'TODO RATING YEAR',
             taxYear: 'TODO TAX YEAR',
             ratesBill: json.data.attributes.fields.total_rates,
             noOfDependants: json.data.attributes.fields.dependants,
-            partner: json.data.attributes.fields.spouse_or_partner === 'yes',
-            combinedIncome: json.data.attributes.fields.income.total_income,
-            singleIncome: json.data.attributes.fields.income.total_income,
+            spouse_or_partner: json.data.attributes.fields.spouse_or_partner === 'yes',
+            total_income: json.data.attributes.fields.income.total_income,
             rebateClaim: 'TODO REBATE CLAIM',
             moved_within_rating_year: json.data.attributes.fields.moved_within_rating_year === 'yes',
             witnessName: 'TODO WITNESS NAME',
@@ -40,7 +39,7 @@ export const useSubmitApplication = (state, onResult, deps) => {
                 {
                     "image": signatureApplicant,
                     "name": application.full_name,
-                    "role": application.occupationStatus,
+                    "role": application.occupation,
                     "type": "applicant"
                 },
                 {

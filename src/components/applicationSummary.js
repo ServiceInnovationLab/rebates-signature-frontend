@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 export const ApplicationSummary = (props) => {
     let {
         full_name,
-        occupationStatus,
+        occupation,
         address,
         ratingYear,
         taxYear,
         ratesBill,
         noOfDependants,
-        partner,
-        combinedIncome,
-        singleIncome,
+        spouse_or_partner,
+        total_income,
         rebateClaim} = props.application;
 
     return (
@@ -28,7 +27,7 @@ export const ApplicationSummary = (props) => {
                     Please check these details for your rebate claim of ${rebateClaim}
                 </p>
 
-                <p>My name is <strong>{full_name}</strong> and my occupation is <strong>{occupationStatus}</strong>.
+                <p>My name is <strong>{full_name}</strong> and my occupation is <strong>{occupation}</strong>.
                 </p>
 
                 <p>My address is <strong>{address}</strong> and I lived here on 1 July {ratingYear}.
@@ -38,13 +37,13 @@ export const ApplicationSummary = (props) => {
 
                 <p>I have <strong>{noOfDependants}</strong> dependant(s).</p>
 
-                {partner ?
+                {spouse_or_partner ?
                 <p>
                     The combined income of myself and my [partner or joint home owner] living with me
-                    on 1 July {taxYear} for the {taxYear} tax year was <strong>${combinedIncome}</strong>.
+                    on 1 July {taxYear} for the {taxYear} tax year was <strong>${total_income}</strong>.
                 </p>
                     :
-                <p>My income for the {taxYear} tax year was <strong>${singleIncome}</strong>.</p>
+                <p>My income for the {taxYear} tax year was <strong>${total_income}</strong>.</p>
                 }
             </div>
         </>
@@ -54,15 +53,14 @@ export const ApplicationSummary = (props) => {
 ApplicationSummary.propTypes = {
     application: PropTypes.shape({
         full_name: PropTypes.string.isRequired,
-        occupationStatus: PropTypes.string.isRequired,
+        occupation: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
         ratingYear: PropTypes.string.isRequired,
         taxYear: PropTypes.string.isRequired,
         ratesBill: PropTypes.string.isRequired,
         noOfDependants: PropTypes.string.isRequired,
-        partner: PropTypes.bool.isRequired,
-        combinedIncome: PropTypes.number.isRequired,
-        singleIncome: PropTypes.number.isRequired,
+        spouse_or_partner: PropTypes.bool.isRequired,
+        total_income: PropTypes.number.isRequired,
         rebateClaim: PropTypes.string.isRequired,
     })
 };
