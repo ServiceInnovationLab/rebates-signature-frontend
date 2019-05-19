@@ -1,7 +1,6 @@
 import React from 'react';
 import {Spinner} from "./spinner";
 import PropTypes from "prop-types";
-import {ApplicationSummary} from "./applicationSummary";
 
 export const PendingTask = (props) => {
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import PropTypes from "prop-types";
-import {PendingTask} from "./pendingTask";
 
 export const Signature = (props) => {
     const [ error, setError ] = useState(false);
