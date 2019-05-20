@@ -45,7 +45,7 @@ export const Signature = (props) => {
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.application}/>}
-                    {props.declaration === 'witness' && <DeclarationWitness data={props.application}/>}
+                    {props.declaration === 'witness' && <DeclarationWitness data={props.witness}/>}
                 </div>
             </div>
         </>
@@ -69,8 +69,8 @@ const DeclarationWitness = (props) => {
 
     return (
         <p className="signatureSection">
-            Declared at <strong>{props.data.witnessLocation}</strong> this&nbsp;
-            <strong>{date}</strong> before me <strong>{props.data.witnessName}</strong>, <strong>{props.data.witnessOccupation}</strong>.
+            Declared at <strong>{props.data.location}</strong> this&nbsp;
+            <strong>{date}</strong> before me <strong>{props.data.name}</strong>, <strong>{props.data.occupation}</strong>.
         </p>
     )
 };
@@ -82,8 +82,5 @@ Signature.propTypes = {
         full_name: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
         occupation: PropTypes.string.isRequired,
-        witnessLocation: PropTypes.string.isRequired,
-        witnessName: PropTypes.string.isRequired,
-        witnessOccupation: PropTypes.string.isRequired,
     })
 };

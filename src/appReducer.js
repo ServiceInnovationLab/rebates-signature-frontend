@@ -1,10 +1,10 @@
-
 export const appReducer = (state, action) => {
     switch (action.type) {
         case 'RECEIVED_TOKEN':
             return {
                 ...state,
-                token: action.token,
+                token: action.data.token,
+                witness: action.data.witness,
                 currentScreen: 'FETCH-APPLICATION',
             };
         case 'FETCHED_APPLICATION':
