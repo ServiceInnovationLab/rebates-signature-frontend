@@ -17,9 +17,6 @@ export const appReducer = (state, action) => {
             return {
                 ...state,
                 currentScreen: 'SIGN-APPLICANT',
-                ddata: {
-                    ...state.data,
-                }
             };
         case 'APPLICANT_SIGNED':
             return {

@@ -3,7 +3,7 @@ import {usePendingFetch, useAsyncRun} from "./lib";
 
 export const useFetchApplication = (token, onResult, deps) => {
     const task = usePendingFetch(async () => {
-        let response = await fetch(`http://localhost:3001/api/v1/rebate_forms/?jwt=${token}`);
+        let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`);
         let json = await response.json();
 
         return {
@@ -51,7 +51,7 @@ export const useSubmitApplication = (state, onResult, deps) => {
             ]
         };
 
-        let response = await fetch(`http://localhost:3001/api/v1/rebate_forms/?jwt=${token}`,{
+        let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`,{
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
