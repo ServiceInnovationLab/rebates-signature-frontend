@@ -10,17 +10,11 @@ export const useFetchApplication = (token, onResult, deps) => {
             full_name: json.data.attributes.fields.full_name,
             occupation: json.data.attributes.fields.occupation,
             address: json.data.attributes.fields.location,
-            ratingYear: 'TODO RATING YEAR',
-            taxYear: 'TODO TAX YEAR',
             ratesBill: json.data.attributes.fields.total_rates,
             noOfDependants: json.data.attributes.fields.dependants,
             spouse_or_partner: json.data.attributes.fields.spouse_or_partner === 'yes',
             total_income: json.data.attributes.fields.income.total_income,
-            rebateClaim: 'TODO REBATE CLAIM',
-            moved_within_rating_year: json.data.attributes.fields.moved_within_rating_year === 'yes',
-            witnessName: 'TODO WITNESS NAME',
-            witnessLocation: 'TODO WITNESS LOCATION',
-            witnessOccupation: 'TODO WITNESS OCCUPATION'
+            moved_within_rating_year: json.data.attributes.fields.moved_within_rating_year === 'yes'
         };
     }, deps);
 
@@ -31,7 +25,13 @@ export const useFetchApplication = (token, onResult, deps) => {
 
 export const useSubmitApplication = (state, onResult, deps) => {
     const task = usePendingFetch(async () => {
-        const {token, signatureApplicant, signatureWitness, application} = state;
+        const {
+            token, 
+            signatureApplicant, 
+            signatureWitness, 
+            application, 
+            witness
+        } = state;
 
         let data = {
             "token": `${token}`,
@@ -44,8 +44,8 @@ export const useSubmitApplication = (state, onResult, deps) => {
                 },
                 {
                     "image": signatureWitness,
-                    "name": application.witnessName,
-                    "role": application.witnessOccupation,
+                    "name": witness.name,
+                    "role": witness.occupation,
                     "type": "witness"
                 }
             ]

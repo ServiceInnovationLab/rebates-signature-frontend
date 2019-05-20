@@ -7,9 +7,11 @@ import {PendingTask} from "./components/pendingTask";
 
 import {appReducer} from './appReducer';
 import {useFetchApplication, useSubmitApplication} from './services';
+import {parseJwt} from './lib';
 
 import './App.css';
 import tick from './images/tick.svg';
+
 
 function App() {
     const [state, dispatch] = useReducer(appReducer, {});
@@ -17,7 +19,13 @@ function App() {
     useEffect(() => {
         let urlParams = new URLSearchParams(window.location.search);
         let token = urlParams.get('t');
-        dispatch({type: 'RECEIVED_TOKEN', token})
+
+        try {
+            let decodedToken = parseJwt(token);
+            dispatch({type: 'RECEIVED_TOKEN', data: {token, witness: decodedToken.witness}});
+        } catch (error) {
+            console.log(error);
+        }
     }, []);
 
     const fetchTask = useFetchApplication(state.token, (result) => {
@@ -69,6 +77,7 @@ function App() {
                     declaration="witness"
                     nextButtonLabel="SUBMIT"
                     application={state.application}
+                    witness={state.witness}
                     title="Witness signature"
                     subheading="Signature of person authorised to witness this declaration"
                     next={(data) => dispatch({type: 'WITNESS_SIGNED', signature: data.signature})}
