@@ -12,6 +12,7 @@
     "react-signature-canvas": "^1.0.1",
     "whatwg-fetch": "^3.0.0"
   },
+  "homepage": "/ipad/",
   "scripts": {
     "start": "concurrently --kill-others \"nodemon test-server/server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
@@ -25,7 +26,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "IE 10"
     ],
     "development": [
       "last 1 chrome version",
