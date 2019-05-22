@@ -230,6 +230,7 @@ body {
   background-color: white;
   border-bottom: 1px solid #ABABAB;
   /*height: 18rem;*/
+  width: 100%; /* assumes canvas width/height set to auto */
 }
 
 .sign-applicant {
