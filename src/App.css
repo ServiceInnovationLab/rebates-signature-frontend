@@ -288,6 +288,10 @@ button.back {
   padding: 0 18px 30px 18px;
 }
 
+.endScreen .summary {
+  margin-bottom: 0;
+}
+
 @media screen and (min-width: 768px) {
   .endScreen {
     padding: 0 50px 50px 50px;
@@ -296,8 +300,17 @@ button.back {
 
 
 .img-tick {
-  width: 15rem;
-  margin: 0 auto;
+  /*width: 15rem;*/
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 44%;
+  margin-top: 10%;
+  max-width: 160px;
+
+
+
+
 
   /*max-width: 15rem;*/
   /*max-height: 15rem;*/
@@ -310,6 +323,16 @@ button.back {
   /*position: relative;*/
   /*top: 10%;*/
   /*left: 27%;*/
+}
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+/* Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+  margin-top: 0;
 }
 
 /* Fonts
