@@ -39,7 +39,7 @@ export const Signature = (props) => {
                             ref={(ref) => {
                                 sigCanvas = ref;
                             }}
-                            penColor='green'
+                            penColor='#369'
                             canvasProps={{width: '750px', height: '200px', className: 'sigCanvas'}}
                             onBegin={() => setError(false)}
                         />
