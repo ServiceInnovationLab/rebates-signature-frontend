@@ -22,7 +22,7 @@ export const ApplicationSummary = (props) => {
                 </div>
             </div>
             <div className="text-content">
-                <h1>Application Summary</h1>
+                <h1>Application summary</h1>
                 <p className="summary">
                     Please check these details for your rebate claim.
                 </p>
@@ -35,15 +35,14 @@ export const ApplicationSummary = (props) => {
 
                 <p>My {ratingYear} rates bill (including water) is <strong>${ratesBill}</strong>.</p>
 
-                <p>I have <strong>{noOfDependants}</strong> dependant(s).</p>
+                <p>I have <strong>{noOfDependants}</strong> dependants.</p>
 
                 {spouse_or_partner ?
                 <p>
-                    The combined income of myself and my [partner or joint home owner] living with me
-                    on 1 July {taxYear} for the {taxYear} tax year was <strong>${total_income}</strong>.
+                    Our combined income is <strong>${total_income}</strong>.
                 </p>
                     :
-                <p>My income for the {taxYear} tax year was <strong>${total_income}</strong>.</p>
+                <p>My income is <strong>${total_income}</strong>.</p>
                 }
             </div>
         </>

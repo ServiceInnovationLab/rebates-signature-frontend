@@ -56,9 +56,9 @@ const DeclarationApplicant = (props) => {
     return (
         <p className="signatureSection">
             I, <strong>{props.data.full_name}</strong> of <strong>{props.data.address}</strong>,
-            occupation <strong>{props.data.occupation}</strong> solemnly and sincerely declare that I believe the
+            occupation <strong>{props.data.occupation}</strong>, solemnly and sincerely declare that I believe the
             information I have given on this form is true and correct, and I make this solemn declaration
-            conscientiously believing the same to be true and virtue of the Oaths and Declarations Act 1957.
+            conscientiously believing the same to be true and by virtue of the Oaths and Declarations Act 1957.
         </p>
     )
 };
@@ -70,7 +70,7 @@ const DeclarationWitness = (props) => {
     return (
         <p className="signatureSection">
             Declared at <strong>{props.data.location}</strong> this&nbsp;
-            <strong>{date}</strong> before me <strong>{props.data.name}</strong>, <strong>{props.data.occupation}</strong>.
+            <strong>{date}</strong> before me, <strong>{props.data.name}</strong>, <strong>{props.data.occupation}</strong>.
         </p>
     )
 };
