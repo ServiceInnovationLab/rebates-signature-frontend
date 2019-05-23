@@ -153,7 +153,16 @@ p.signature-error:before{
   flex: 1;
   background-color: white;
   border-bottom: 1px solid #ABABAB;
-  /*height: 18rem;*/
+  width: 100%;
+  min-height: 150px;
+}
+
+.sigImage {
+    width: 200px;
+    position: absolute;
+    left: 280px;
+    pointer-events: none;
+    z-index: 2;
 }
 
 button {
