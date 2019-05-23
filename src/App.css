@@ -71,11 +71,12 @@ strong {
 p.summary {
   font-size: 20px;
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: .5em;
 }
 
 @media screen and (min-width: 768px) {
   p.summary {
+    margin-bottom: 0;
     font-size: 26px;
   }
 }
@@ -116,7 +117,7 @@ p.signature-error {
   font-weight: bold; /* todo fira bold */
   font-size: 18px;
   padding-left: 22px;
-}
+ }
 
 p.signature-error:before{
   content: '';
@@ -201,7 +202,13 @@ body {
  }
 
 .signatureSection {
-  margin: 0;
+  margin: 0 50px 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .signatureSection  {
+    margin-right: 0;
+  }
 }
 
 .signature {
@@ -210,11 +217,15 @@ body {
 
 .wrap-signature {
   position: relative; /* contain error msg */
+  margin-bottom: .75rem;
+  margin-right: 38px; /* todo: only apply this in landscape media query up to (ipad) width? */
 }
 
 @media screen and (min-width: 768px) {
   .wrap-signature {
     margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -224,14 +235,23 @@ body {
 
 .sigCanvas {
   touch-action: none;
-  margin: .75rem auto;
+  /*margin: .75rem auto;*/
   display: block;
   flex: 1;
   background-color: white;
-  border-bottom: 1px solid #ABABAB;
+  border: 1px solid #ABABAB;
   /*height: 18rem;*/
   width: 100%; /* assumes canvas width/height set to auto */
+  max-height: 166px;
 }
+
+@media screen and (min-width: 768px) {
+.sigCanvas {
+  max-height: 250px;
+}
+
+}
+
 
 .sign-applicant {
   display: flex;
@@ -300,29 +320,11 @@ button.back {
 
 
 .img-tick {
-  /*width: 15rem;*/
   margin-left: auto;
   margin-right: auto;
-
   width: 44%;
   margin-top: 10%;
   max-width: 160px;
-
-
-
-
-
-  /*max-width: 15rem;*/
-  /*max-height: 15rem;*/
-  /*left: 20rem;*/
-  /*top: 8rem;*/
-  /*display: flex;*/
-  /*flex: 1 0 auto;*/
-  /*flex-direction: column;*/
-  /*padding: 0 50px;*/
-  /*position: relative;*/
-  /*top: 10%;*/
-  /*left: 27%;*/
 }
 
 /* ----------- iPhone 5, 5S, 5C and 5SE ----------- */

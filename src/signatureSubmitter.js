@@ -84,9 +84,7 @@ export const SignatureSubmitter = (props) => {
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    {state.submittingSignaturesError &&
-                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
-                    }
+
                 </div>
             </div>
 
@@ -118,8 +116,9 @@ export const SignatureSubmitter = (props) => {
                 }
 
                 {state.submittingSignaturesError &&
-                <div>
+                <div className="wrap-system-msg">
                     <p className="system-msg system-msg--error">Error while submitting signatures, please try again...</p>
+                    <button className='next' onClick={() => dispatch({type: 'RETRY'})}>RETRY</button>
                 </div>
                 }
             </div>
