@@ -119,6 +119,11 @@ p.signature-error {
   padding-left: 22px;
  }
 
+p.signature-error span{
+  position: absolute;
+  top: .75em;
+}
+
 p.signature-error:before{
   content: '';
   border-right: 3px solid #b10e1e;

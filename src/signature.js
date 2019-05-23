@@ -23,7 +23,7 @@ export const Signature = (props) => {
                 <div className='signature'>
                     <div className="wrap-signature">
                         {/* todo JUAN - hardcoded error state below  */}
-                        <p className="signature-error">Please sign before you proceed</p>
+                        <p className="signature-error"><span>Please sign before you proceed</span></p>
 
                         <SignatureCanvas
                             ref={(ref) => {
