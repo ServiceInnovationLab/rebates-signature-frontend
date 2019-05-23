@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import PropTypes from "prop-types";
 
+import SignatureImage from '../images/signature-noLine1.svg';
+
 export const Signature = (props) => {
     const [ error, setError ] = useState(false);
     let sigCanvas = null;
@@ -34,14 +36,15 @@ export const Signature = (props) => {
                 <div className='signature'>
                     <div className="wrap-signature">
                         { error && <p className="signature-error">Please sign before you proceed</p>}
-
+                        <img className="sigImage" src={SignatureImage} alt="signature"></img>
                         <SignatureCanvas
                             ref={(ref) => {
                                 sigCanvas = ref;
                             }}
                             penColor='#369'
-                            canvasProps={{width: '750px', height: '200px', className: 'sigCanvas'}}
-                            onBegin={() => setError(false)}
+                            canvasProps={{className: 'sigCanvas'}}
+                            onBegin={() => {setError(false);
+                                            document.getElementsByClassName('sigImage')[0].style.cssText="visibility: hidden; opacity: 0;transition: visibility 0s .35s, opacity .35s linear;";}}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.application}/>}
