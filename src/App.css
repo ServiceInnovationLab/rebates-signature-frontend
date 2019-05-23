@@ -82,7 +82,6 @@ p.summary {
 }
 
 
-
 .wrap-system-msg {
   text-align: center; /* center Retry <button> */
 }
@@ -258,13 +257,12 @@ body {
 }
 
 
-.sign-applicant {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-color: #efefef;
-  padding: 15px 25px;
-  height: auto;
+.sigImage {
+    width: 200px;
+    position: absolute;
+    left: 280px;
+    pointer-events: none;
+    z-index: 2;
 }
 
 button {
@@ -299,6 +297,13 @@ button.back {
   background-color: #eee;
   color: #000 !important;
   border: 1px solid black;
+}
+
+.controls button.next {
+  float: right
+}
+
+.content button.next {
 }
 
 .endScreen {
