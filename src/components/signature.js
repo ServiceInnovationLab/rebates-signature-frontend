@@ -36,15 +36,15 @@ export const Signature = (props) => {
                 <div className='signature'>
                     <div className="wrap-signature">
                         { error && <p className="signature-error"><span>Please sign before you proceed</span></p>}
-                        <img className="sigImage" src={SignatureImage} alt="signature"></img>
+                        <span className="sigBgImage"></span>
                         <SignatureCanvas
                             ref={(ref) => {
                                 sigCanvas = ref;
                             }}
                             penColor='#369'
-                            canvasProps={{width: 'auto', height: 'auto', className: 'sigCanvas'}}
+                            canvasProps={{width: '750', height: '250', className: 'sigCanvas'}}
                             onBegin={() => {setError(false);
-                                            document.getElementsByClassName('sigImage')[0].style.cssText="visibility: hidden; opacity: 0;transition: visibility 0s .35s, opacity .35s linear;";}}
+                                            document.getElementsByClassName('sigBgImage')[0].style.cssText="visibility: hidden; opacity: 0;transition: visibility 0s .35s, opacity .35s linear;";}}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.application}/>}
