@@ -1,7 +1,6 @@
 let state = require('./testdata');
 
 let getCount = 0;
-
 module.exports.getApplication = (req, res) => {
 
     getCount++;
@@ -17,14 +16,15 @@ module.exports.getApplication = (req, res) => {
     })();
 };
 
+let postCount = 0;
 module.exports.postApplication = (req, res) => {
 
-    getCount++;
+    postCount++;
 
     (async () => {
         await sleep(1000);
 
-        if (getCount % 2) {
+        if (postCount % 2) {
             res.status(500).send({message: 'This is an error!'});
         } else {
             res.json(state.postResponse);
@@ -33,7 +33,7 @@ module.exports.postApplication = (req, res) => {
 };
 
 function sleep(ms){
-    return new Promise(resolve=>{
-        setTimeout(resolve,ms)
+    return new Promise(resolve => {
+        setTimeout(resolve, ms)
     })
 }
