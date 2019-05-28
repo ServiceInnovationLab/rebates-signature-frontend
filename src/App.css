@@ -227,14 +227,14 @@ body {
 
 .signature {
   flex: 1;
-  position: relative; /* contain error msg and sinBgImage */
 }
 
 
 
-.wrap-signature {
+.wrap-signature-canvas {
+  position: relative; /* contain error msg and sinBgImage */
   margin-bottom: .75rem;
-  /*margin-right: 38px; !* todo: should we only apply this in landscape media query up to (ipad) width? *!*/
+  margin-right: 38px; /* todo: should we only apply this in landscape media query up to (ipad) width? */
 }
 
 @media screen and (min-width: 768px) {
@@ -253,6 +253,7 @@ body {
   touch-action: none;
   background-color: white;
   outline: 1px solid #ABABAB;
+  border-left: 3px solid white;
 }
 
 .sigBgImage {
@@ -264,7 +265,7 @@ body {
   right: 0;
   bottom: 0;
   background-image: url("images/signature-noLine1.svg");
-  background-position: 50%;
+  background-position: 49% 45%;
   background-size: 24%;
   background-repeat: no-repeat;
 }

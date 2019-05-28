@@ -34,7 +34,7 @@ export const Signature = (props) => {
     function resizeCanvas() {
         console.log(' resize', sigCanvas);
         if (sigCanvas) {
-            let element = document.querySelector('.signature');
+            let element = document.querySelector('.wrap-signature-canvas');
             console.log(sigCanvas.getCanvas());
             let canvas = sigCanvas.getCanvas();
             canvas.setAttribute('width', 1);
@@ -79,7 +79,7 @@ export const Signature = (props) => {
                 <p className="summary">{props.subheading}</p>
 
                 <div className='signature'>
-                    {/*<div className="wrap-signature">*/}
+                    <div className="wrap-signature-canvas">
                         { error && <p className="signature__error-msg"><span>Please sign before you proceed</span></p>}
                         <span className="sigBgImage"></span>
                         <SignatureCanvas
@@ -90,7 +90,7 @@ export const Signature = (props) => {
                             canvasProps={{width: '1', height: '1', className: 'sigCanvas'}}
                             onBegin={() => hideBackgroundImage()}
                         />
-                    {/*</div>*/}
+                    </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.application}/>}
                     {props.declaration === 'witness' && <DeclarationWitness data={props.witness}/>}
                 </div>
