@@ -115,8 +115,11 @@ p.system-msg.system-msg--error{
   border-color: #b10e1e;
 }
 
+.signature.error .sigCanvas{
+  border-left: 3px solid #b10e1e;
+}
 
-p.signature-error {
+.signature.error p.signature__error-msg {
   color: #b10e1e;
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-size: 18px;
@@ -124,21 +127,21 @@ p.signature-error {
   margin: 0;
  }
 
-p.signature-error span{
+.signature.error p.signature__error-msg span{
   position: absolute;
   top: .75em;
   left: .75em;
   line-height: 1;
 }
 
-p.signature-error:before{
-  content: '';
-  border-right: 3px solid #b10e1e;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-}
+/*p.signature-error:before{*/
+/*  content: '';*/
+/*  border-right: 3px solid #b10e1e;*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*}*/
 
 #root {
   display: flex;
@@ -184,7 +187,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  /*overflow: hidden;*/
+  overflow: hidden;
   font-family: "Fira", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-size: 18px;
@@ -213,7 +216,7 @@ body {
  }
 
 .signatureSection {
-  margin: 0 50px 0 0;
+  margin: .75rem 50px 0 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -224,12 +227,14 @@ body {
 
 .signature {
   flex: 1;
+  position: relative; /* contain error msg and sinBgImage */
 }
 
+
+
 .wrap-signature {
-  position: relative; /* contain error msg and sinBgImage */
   margin-bottom: .75rem;
-  margin-right: 38px; /* todo: should we only apply this in landscape media query up to (ipad) width? */
+  /*margin-right: 38px; !* todo: should we only apply this in landscape media query up to (ipad) width? *!*/
 }
 
 @media screen and (min-width: 768px) {
@@ -247,7 +252,7 @@ body {
 .sigCanvas {
   touch-action: none;
   background-color: white;
-  border: 1px solid #ABABAB;
+  outline: 1px solid #ABABAB;
 }
 
 .sigBgImage {
