@@ -3,8 +3,8 @@ import SignatureCanvas from 'react-signature-canvas';
 import PropTypes from "prop-types";
 
 export const Signature = (props) => {
-    const [ error, setError ] = useState(false);
-    let sigCanvas = null;
+    const [error, setError] = useState(false);
+    const [sigCanvas, setSigCanvas] = useState(null);
 
     const onNext = () => {
         if (sigCanvas.isEmpty()) {
@@ -24,7 +24,6 @@ export const Signature = (props) => {
 
         return () => {
           window.removeEventListener('resize', resizeCanvas);
-          console.log(' destroy');
         };
     }, [sigCanvas]);
 
@@ -32,17 +31,16 @@ export const Signature = (props) => {
     useEffect(() => resizeCanvas(), [sigCanvas]);
 
     function resizeCanvas() {
-        console.log(' resize', sigCanvas);
         if (sigCanvas) {
+            sigCanvas.clear();
+
             let element = document.querySelector('.wrap-signature-canvas');
-            console.log(sigCanvas.getCanvas());
             let canvas = sigCanvas.getCanvas();
             canvas.setAttribute('width', 1);
             canvas.setAttribute('height', 1);
 
             canvas.setAttribute('width', element.offsetWidth);
             canvas.setAttribute('height', (element.offsetWidth * 0.33));
-            console.log(element.offsetHeight, element.offsetWidth);
 
             showBackgroundImage();
         }
@@ -56,10 +54,10 @@ export const Signature = (props) => {
     }
 
     function showBackgroundImage() {
-        setError(false);
+        // setError(false);
         document.getElementsByClassName(
             'sigBgImage')[0].style.cssText="visibility: default; opacity: 1;transition: visibility 0s .35s, opacity .35s linear";
-        document.querySelector('.signature').className = 'signature';
+        // document.querySelector('.signature').className = 'signature';
     }
 
     return (
@@ -84,7 +82,7 @@ export const Signature = (props) => {
                         <span className="sigBgImage"></span>
                         <SignatureCanvas
                             ref={(ref) => {
-                                sigCanvas = ref;
+                                setSigCanvas(ref);
                             }}
                             penColor='#369'
                             canvasProps={{width: '1', height: '1', className: 'sigCanvas'}}
