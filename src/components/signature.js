@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import PropTypes from "prop-types";
-
-import SignatureImage from '../images/signature-noLine1.svg';
 
 export const Signature = (props) => {
     const [ error, setError ] = useState(false);
@@ -11,11 +9,58 @@ export const Signature = (props) => {
     const onNext = () => {
         if (sigCanvas.isEmpty()) {
             setError(true);
+            document.querySelector('.signature').className = 'signature error';
         } else {
             setError(false);
             props.next({signature: sigCanvas.toDataURL()});
         }
     };
+
+    // resize canvas after window resize
+    useEffect(() => {
+        if (sigCanvas) {
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        return () => {
+          window.removeEventListener('resize', resizeCanvas);
+          console.log(' destroy');
+        };
+    }, [sigCanvas]);
+
+    // resize canvas on initial load
+    useEffect(() => resizeCanvas(), [sigCanvas]);
+
+    function resizeCanvas() {
+        console.log(' resize', sigCanvas);
+        if (sigCanvas) {
+            let element = document.querySelector('.wrap-signature-canvas');
+            console.log(sigCanvas.getCanvas());
+            let canvas = sigCanvas.getCanvas();
+            canvas.setAttribute('width', 1);
+            canvas.setAttribute('height', 1);
+
+            canvas.setAttribute('width', element.offsetWidth);
+            canvas.setAttribute('height', (element.offsetWidth * 0.33));
+            console.log(element.offsetHeight, element.offsetWidth);
+
+            showBackgroundImage();
+        }
+    }
+
+    function hideBackgroundImage() {
+        setError(false);
+        document.getElementsByClassName(
+            'sigBgImage')[0].style.cssText="visibility: hidden; opacity: 0;transition: visibility 0s .35s, opacity .35s linear;";
+        document.querySelector('.signature').className = 'signature';
+    }
+
+    function showBackgroundImage() {
+        setError(false);
+        document.getElementsByClassName(
+            'sigBgImage')[0].style.cssText="visibility: default; opacity: 1;transition: visibility 0s .35s, opacity .35s linear";
+        document.querySelector('.signature').className = 'signature';
+    }
 
     return (
         <>
@@ -34,17 +79,16 @@ export const Signature = (props) => {
                 <p className="summary">{props.subheading}</p>
 
                 <div className='signature'>
-                    <div className="wrap-signature">
-                        { error && <p className="signature-error">Please sign before you proceed</p>}
-                        <img className="sigImage" src={SignatureImage} alt="signature"></img>
+                    <div className="wrap-signature-canvas">
+                        { error && <p className="signature__error-msg"><span>Please sign before you proceed</span></p>}
+                        <span className="sigBgImage"></span>
                         <SignatureCanvas
                             ref={(ref) => {
                                 sigCanvas = ref;
                             }}
                             penColor='#369'
-                            canvasProps={{className: 'sigCanvas'}}
-                            onBegin={() => {setError(false);
-                                            document.getElementsByClassName('sigImage')[0].style.cssText="visibility: hidden; opacity: 0;transition: visibility 0s .35s, opacity .35s linear;";}}
+                            canvasProps={{width: '1', height: '1', className: 'sigCanvas'}}
+                            onBegin={() => hideBackgroundImage()}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.application}/>}

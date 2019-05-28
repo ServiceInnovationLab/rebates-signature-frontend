@@ -29,6 +29,7 @@ function App() {
     }, []);
 
     const fetchTask = useFetchApplication(state.token, (result) => {
+        console.log(' fetch');
         dispatch({type: 'FETCHED_APPLICATION', application: result})
     }, [state.token]);
 

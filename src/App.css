@@ -1,39 +1,54 @@
-html {
-  overflow: auto;
-  height: 100%;
-  width: 100%;
+
+.debug {
+  display: block; /* none */
 }
 
-body {
+body{
   line-height: 1.5;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  font-family: "Fira", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-size: 18px;
-  color: #000;
-  overflow: auto;
 }
 
-p {
+p{
   margin-top: 0;
 }
 
+div {
+  /* border: 2px solid red; */
+}
+
 header {
-  padding: 0 48px;
+  padding: 0 18px;
   background: black;
   color: white;
+
 }
+
+@media screen and (min-width: 768px) {
+  header {
+    padding: 0 50px;
+  }
+}
+
+
 
 h1 {
   margin: 1rem 0 0 0;
-  font-size: 44px;
+  font-size: 24px;
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-weight: normal;
 }
 
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 44px;
+  }
+}
+
+
+
+
+
 header h2 {
+  font-size: 20px;
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-weight: normal;
   margin-top: 0;
@@ -41,51 +56,97 @@ header h2 {
   line-height: 60px;
 }
 
+@media screen and (min-width: 768px) {
+  header h2{
+    font-size: 28px;
+  }
+}
+
+
 strong {
   font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
   font-weight: normal;
 }
 
 p.summary {
-  font-size: 26px;
+  font-size: 20px;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: .5em;
 }
+
+@media screen and (min-width: 768px) {
+  p.summary {
+    margin-bottom: 0;
+    font-size: 26px;
+  }
+}
+
 
 .wrap-system-msg {
   text-align: center; /* center Retry <button> */
+  padding: 18px;
 }
 
 p.system-msg {
-  margin: 50px auto;
-  padding: 20px;
-  border: 4px solid white;
+  margin: 0 auto;
+  padding: 10px;
+  border: 2px solid white;
   max-width: 500px;
+  margin-bottom: 18px;
+}
 
+@media screen and (min-width: 768px) {
+  p.system-msg {
+    margin: 50px auto;
+
+    padding: 20px;
+    border-width: 4px;
+  }
 }
 
 p.system-msg.system-msg--processing {
+
+
 }
+
 
 p.system-msg.system-msg--error{
   color: #b10e1e;
   border-color: #b10e1e;
 }
 
-p.signature-error {
-  color: #b10e1e;
-  font-weight: bold; /* todo fira bold */
-  font-size: 18px;
-  padding-left: 22px;
+.signature.error .sigCanvas{
+  border-left: 3px solid #b10e1e;
 }
 
-p.signature-error:before{
-  content: '';
-  border-right: 3px solid #b10e1e;
+.signature.error p.signature__error-msg {
+  color: #b10e1e;
+  font-family: "Fira-Bold", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  /*padding-left: 22px;*/
+  margin: 0;
+ }
+
+.signature.error p.signature__error-msg span{
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  top: .75em;
+  left: .75em;
+  line-height: 1;
+}
+
+/*p.signature-error:before{*/
+/*  content: '';*/
+/*  border-right: 3px solid #b10e1e;*/
+/*  position: absolute;*/
+/*  left: 0;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*}*/
+
+#root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .App {
@@ -100,12 +161,20 @@ p.signature-error:before{
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 0 18px 30px 18px;
 
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
 }
+
+@media screen and (min-width: 768px) {
+  .text-content {
+    padding: 0 50px 50px 50px;
+
+  }
+}
+
 
 .content {
   display: flex;
@@ -114,13 +183,30 @@ p.signature-error:before{
   height: 100%;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Fira", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  color: #000;
+}
+
 .controlsBackground {
   background-color: #EBEBEB;
-  min-height: 82px;
 }
 
 .controls {
-  margin: 1rem 3rem; /* 25px 50px */
+  margin: 12px 18px ; /* 1rem 3rem */
+}
+
+
+@media screen and (min-width: 768px) {
+  .controls {
+    margin: 25px 50px ; /* 1rem 3rem */
+  }
 }
 
 .controls:after {
@@ -130,16 +216,33 @@ p.signature-error:before{
  }
 
 .signatureSection {
-  margin: 0;
+  margin: .75rem 50px 0 0;
+}
+
+@media screen and (min-width: 768px) {
+  .signatureSection  {
+    margin-right: 0;
+  }
 }
 
 .signature {
   flex: 1;
 }
 
-.wrap-signature {
-  margin-top: 20px;
-  position: relative; /* contain error msg */
+
+
+.wrap-signature-canvas {
+  position: relative; /* contain error msg and sinBgImage */
+  margin-bottom: .75rem;
+  margin-right: 38px; /* todo: should we only apply this in landscape media query up to (ipad) width? */
+}
+
+@media screen and (min-width: 768px) {
+  .wrap-signature {
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .signature div {
@@ -148,21 +251,23 @@ p.signature-error:before{
 
 .sigCanvas {
   touch-action: none;
-  margin: .75rem auto;
-  display: block;
-  flex: 1;
   background-color: white;
-  border-bottom: 1px solid #ABABAB;
-  width: 100%;
-  min-height: 150px;
+  outline: 1px solid #ABABAB;
+  border-left: 3px solid white;
 }
 
-.sigImage {
-    width: 200px;
-    position: absolute;
-    left: 280px;
-    pointer-events: none;
-    z-index: 2;
+.sigBgImage {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("images/signature-noLine1.svg");
+  background-position: 49% 45%;
+  background-size: 24%;
+  background-repeat: no-repeat;
 }
 
 button {
@@ -181,8 +286,17 @@ button {
 
 button.next {
   background-color: #369;
-  border: 1px solid #247;
+  border: 1px solid #369;
 }
+
+.controls button.next {
+  float: right
+}
+
+.content button.next {
+}
+
+
 
 button.back {
   background-color: #eee;
@@ -201,21 +315,41 @@ button.back {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
+  /*padding: 90px 110px;*/
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
+
+  padding: 0 18px 30px 18px;
 }
 
+.endScreen .summary {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .endScreen {
+    padding: 0 50px 50px 50px;
+  }
+}
+
+
 .img-tick {
-  max-width: 15rem;
-  max-height: 15rem;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  padding: 0 50px;
-  position: relative;
-  top: 10%;
-  left: 27%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 44%;
+  margin-top: 10%;
+  max-width: 160px;
+}
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+/* Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+  margin-top: 0;
 }
 
 /* Fonts
