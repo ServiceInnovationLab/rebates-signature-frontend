@@ -34,24 +34,26 @@ export const useSubmitApplication = (state, onResult, deps) => {
         } = state;
 
         let data = {
-            "token": `${token}`,
-            "signatures": [
-                {
-                    "image": signatureApplicant,
-                    "name": application.full_name,
-                    "role": application.occupation,
-                    "type": "applicant"
-                },
-                {
-                    "image": signatureWitness,
-                    "name": witness.name,
-                    "role": witness.occupation,
-                    "type": "witness"
-                }
-            ]
+            "data": {
+                "token": `${token}`,
+                "signatures": [
+                    {
+                        "image": signatureApplicant,
+                        "name": application.full_name,
+                        "role": application.occupation,
+                        "type": "applicant"
+                    },
+                    {
+                        "image": signatureWitness,
+                        "name": witness.name,
+                        "role": witness.occupation,
+                        "type": "witness"
+                    }
+                ]    
+            }
         };
 
-        let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`,{
+        let response = await fetch(`/api/v1/rebate_forms/sign`,{
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, cors, *same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
