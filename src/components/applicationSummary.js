@@ -39,10 +39,10 @@ export const ApplicationSummary = (props) => {
 
                 {spouse_or_partner ?
                 <p>
-                    Our combined income is <strong>${total_income}</strong>.
+                    Our combined income (before tax) for the {taxYear} tax year is <strong>${total_income}</strong>.
                 </p>
                     :
-                <p>My income is <strong>${total_income}</strong>.</p>
+                <p>My income (before tax) for the {taxYear} tax year is <strong>${total_income}</strong>.</p>
                 }
             </div>
         </>
