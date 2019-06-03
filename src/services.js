@@ -3,7 +3,7 @@ import {usePendingFetch, useAsyncRun} from "./lib";
 
 export const useFetchApplication = (token, onResult, deps) => {
     const task = usePendingFetch(async () => {
-        let response = await fetch(`api/v1/rebate_forms/?jwt=${token}`);
+        let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`);
         let json = await response.json();
 
         return {
