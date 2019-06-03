@@ -9,7 +9,7 @@
     "react-qr-reader": "^2.2.1",
     "react-qr-scanner": "0.0.8",
     "react-scripts": "3.0.1",
-    "react-signature-canvas": "^1.0.1",
+    "react-signature-pad-wrapper": "^1.2.5",
     "whatwg-fetch": "^3.0.0"
   },
   "homepage": "/ipad/",

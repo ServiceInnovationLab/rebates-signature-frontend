@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import SignaturePad from 'react-signature-pad-wrapper';
 import PropTypes from "prop-types";
 
 export const Signature = (props) => {
@@ -16,35 +16,12 @@ export const Signature = (props) => {
         }
     };
 
-    // resize canvas after window resize
+    // workaround, SignaturePad react component doesn't set onBegin on sigCanvas
     useEffect(() => {
         if (sigCanvas) {
-            window.addEventListener('resize', resizeCanvas);
+            sigCanvas.onBegin = hideBackgroundImage;
         }
-
-        return () => {
-          window.removeEventListener('resize', resizeCanvas);
-        };
     }, [sigCanvas]);
-
-    // resize canvas on initial load
-    useEffect(() => resizeCanvas(), [sigCanvas]);
-
-    function resizeCanvas() {
-        if (sigCanvas) {
-            sigCanvas.clear();
-
-            let element = document.querySelector('.wrap-signature-canvas');
-            let canvas = sigCanvas.getCanvas();
-            canvas.setAttribute('width', 1);
-            canvas.setAttribute('height', 1);
-
-            canvas.setAttribute('width', element.offsetWidth);
-            canvas.setAttribute('height', (element.offsetWidth * 0.33));
-
-            showBackgroundImage();
-        }
-    }
 
     function hideBackgroundImage() {
         setError(false);
@@ -54,10 +31,8 @@ export const Signature = (props) => {
     }
 
     function showBackgroundImage() {
-        // setError(false);
         document.getElementsByClassName(
             'sigBgImage')[0].style.cssText="visibility: default; opacity: 1;transition: visibility 0s .35s, opacity .35s linear";
-        // document.querySelector('.signature').className = 'signature';
     }
 
     return (
@@ -80,13 +55,11 @@ export const Signature = (props) => {
                     <div className="wrap-signature-canvas">
                         { error && <p className="signature__error-msg"><span>Please sign before you proceed</span></p>}
                         <span className="sigBgImage"></span>
-                        <SignatureCanvas
-                            ref={(ref) => {
-                                setSigCanvas(ref);
-                            }}
+                        <SignaturePad
+                            ref={(ref) => setSigCanvas(ref)}
                             penColor='#369'
-                            canvasProps={{width: '1', height: '1', className: 'sigCanvas'}}
-                            onBegin={() => hideBackgroundImage()}
+                            canvasProps={{className: 'sigCanvas'}}
+                            redrawOnResize={true}
                         />
                     </div>
                     {props.declaration === 'applicant' && <DeclarationApplicant data={props.application}/>}
