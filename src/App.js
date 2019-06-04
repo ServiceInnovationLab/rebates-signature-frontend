@@ -48,18 +48,21 @@ function App() {
                     task={fetchTask}
                     title="Retrieving application..."
                     errorTitle="Error while retrieving application"
+                    analytics = "ga-error-appget"
                 />
 
                 <PendingTask
                     task={submitTask}
                     title="Submitting application..."
                     errorTitle="Error while submitting application"
+                    analytics = "ga-error-sigsend"
                 />
 
                 {state.currentScreen === 'CONFIRM-APPLICATION' &&
                 <ApplicationSummary
                     application={state.application}
                     onNext={() => dispatch({type: 'CONFIRMED_APPLICATION'})}
+                    analytics = "ga-appsum-next"
                 />}
 
                 {state.currentScreen === 'SIGN-APPLICANT' &&
@@ -71,6 +74,8 @@ function App() {
                     subheading="Please sign to complete your application"
                     next={(data) => dispatch({type: 'APPLICANT_SIGNED', signature: data.signature})}
                     back={() => dispatch({type: 'CANCEL_APPLICANT_SIGN'})}
+                    analyticsBack = "ga-appsig-goback"
+                    analyticsNext = "ga-appsig-next"
                 />}
 
                 {state.currentScreen === 'SIGN-WITNESS' &&
@@ -83,10 +88,12 @@ function App() {
                     subheading="Signature of person authorised to witness this declaration"
                     next={(data) => dispatch({type: 'WITNESS_SIGNED', signature: data.signature})}
                     back={() => dispatch({type: 'CANCEL_WITNESS_SIGN'})}
+                    analyticsBack = "ga-witsig-goback"
+                    analyticsNext = "ga-witsig-submit"
                 />}
 
                 {state.currentScreen === 'THANK-YOU' &&
-                <div className="endScreen">
+                <div className="endScreen ga-deccomplete">
                     <h1>Thank you</h1>
                     <p className="summary">
                         This declaration is now complete and ready to be processed.
