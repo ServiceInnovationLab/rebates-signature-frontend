@@ -19,7 +19,7 @@ module.exports.application = {
                         "wages_salary": "4",
                         "add new incommmm": "4"
                     },
-                    "total_income": 806,
+                    "total_income": 1234567,
                     "partner": {
                         "other_superannuation": "20",
                         "nz_superannuation": "40",

@@ -13,7 +13,7 @@ export const useFetchApplication = (token, onResult, deps) => {
             ratesBill: json.data.attributes.fields.total_rates,
             noOfDependants: json.data.attributes.fields.dependants,
             spouse_or_partner: json.data.attributes.fields.spouse_or_partner === 'yes',
-            total_income: json.data.attributes.fields.income.total_income,
+            total_income: json.data.attributes.fields.income.total_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
             moved_within_rating_year: json.data.attributes.fields.moved_within_rating_year === 'yes'
         };
     }, deps);
