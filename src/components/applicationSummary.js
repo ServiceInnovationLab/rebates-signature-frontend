@@ -17,6 +17,7 @@ export const ApplicationSummary = (props) => {
         lived_in_property_1_July,
         moved_within_rating_year} = props.application;
 
+    let rates_bill_formatted = formatDollars(ratesBill);
     let total_income_formatted = formatDollars(total_income);
 
     return (
@@ -41,7 +42,7 @@ export const ApplicationSummary = (props) => {
                     {moved_within_rating_year ? ' I have moved ' : ' I have not moved'} within this rating year.
                 </p>
 
-                <p>My {ratingYear} rates bill (including water) is <strong>${ratesBill}</strong>.</p>
+                <p>My {ratingYear} rates bill (including water) is <strong>{rates_bill_formatted}</strong>.</p>
 
                 <p>I have <strong>{noOfDependants}</strong> dependants.</p>
 
