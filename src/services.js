@@ -5,16 +5,18 @@ export const useFetchApplication = (token, onResult, deps) => {
     const task = usePendingFetch(async () => {
         let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`);
         let json = await response.json();
+        let fields = json.data.attributes.fields;
 
         return {
-            full_name: json.data.attributes.fields.full_name,
-            occupation: json.data.attributes.fields.occupation,
-            address: json.data.attributes.fields.location,
-            ratesBill: json.data.attributes.fields.total_rates,
-            noOfDependants: json.data.attributes.fields.dependants,
-            spouse_or_partner: json.data.attributes.fields.spouse_or_partner === 'yes',
-            total_income: json.data.attributes.fields.income.total_income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-            moved_within_rating_year: json.data.attributes.fields.moved_within_rating_year === 'yes'
+            full_name: fields.full_name,
+            occupation: fields.occupation,
+            address: fields.location,
+            ratesBill: fields.total_rates,
+            noOfDependants: fields.dependants,
+            spouse_or_partner: (typeof fields.spouse_or_partner !== 'undefined') ? fields.spouse_or_partner === 'yes' : false,
+            total_income: fields.income.total_income,
+            moved_within_rating_year: (typeof fields.moved_within_rating_year !== 'undefined') ? fields.moved_within_rating_year === 'yes' : false,
+            lived_in_property_1_July: (typeof fields.lived_in_property_1_July !== 'undefined') ? fields.lived_in_property_1_July === 'yes' : false,
         };
     }, deps);
 
@@ -49,7 +51,7 @@ export const useSubmitApplication = (state, onResult, deps) => {
                         "role": witness.occupation,
                         "type": "witness"
                     }
-                ]    
+                ]
             }
         };
 
