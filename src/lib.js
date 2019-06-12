@@ -97,10 +97,38 @@ export const useAsyncRun = (asyncTask, onResult) => {
 };
 
 export function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+    let base64Url = token.split('.')[1];
+    let base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(base64);
-};
+}
+
+
+export function formatDollars(amount, currency = '$', decimalCount = 2, decimal = ".", thousands = ",") {
+    if (typeof amount === 'undefined') {
+        return '$0.00';
+    }
+
+    try {
+        decimalCount = Math.abs(decimalCount);
+        decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+        const negativeSign = amount < 0 ? "-" : "";
+
+        let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+        let j = (i.length > 3) ? i.length % 3 : 0;
+
+        let digits = (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+        if (amount - i === 0) {
+            digits = '';
+        }
+
+        return currency + negativeSign +
+            (j ? i.substr(0, j) + thousands : '') +
+            i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + digits;
+    } catch (e) {
+        return amount;
+    }
+}
