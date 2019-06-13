@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export const PendingTask = (props) => {
 
-    const {task, title, errorTitle} = props;
+    const {task, title, errorTitle, extraClassNextButton} = props;
 
     return (
         <>
@@ -14,7 +14,7 @@ export const PendingTask = (props) => {
             {task.error &&
             <div className="wrap-system-msg">
                 <p className="system-msg system-msg--error">{errorTitle}</p>
-                <button className='next' onClick={() => task.start()}>Try Again</button>
+                <button className={"next " + extraClassNextButton} onClick={() => task.start()}>Try Again</button>
             </div>}
         </>
     );

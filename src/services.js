@@ -56,16 +56,16 @@ export const useSubmitApplication = (state, onResult, deps) => {
         };
 
         let response = await fetch(`/api/v1/rebate_forms/sign`,{
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'omit', // include, *same-origin, omit
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'omit',
             headers: {
                 'Content-Type': 'application/json',
             },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data),
         }).then((response) => {
             if (response.status >= 200 && response.status < 300) {
                 return response;

@@ -6,6 +6,7 @@ export const ApplicationSummary = (props) => {
     let ratingYear = new Date().getFullYear() - 1;
     let taxYear = (new Date().getFullYear() - 2) + '/' + (new Date().getFullYear() - 1);
 
+    let {extraClassNextButton} = props;
     let {
         full_name,
         occupation,
@@ -23,7 +24,7 @@ export const ApplicationSummary = (props) => {
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    <button className='next' onClick={props.onNext}>NEXT</button>
+                    <button className={"next " + extraClassNextButton} onClick={props.onNext}>NEXT</button>
                 </div>
             </div>
             <div className="text-content">
