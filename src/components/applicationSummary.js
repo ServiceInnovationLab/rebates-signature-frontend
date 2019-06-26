@@ -16,7 +16,9 @@ export const ApplicationSummary = (props) => {
         spouse_or_partner,
         total_income,
         lived_in_property_1_July,
-        moved_within_rating_year} = props.application;
+        moved_within_rating_year,
+        income_less_than_5k
+    } = props.application;
 
     let total_income_formatted = formatDollars(total_income);
     let ratesBill_formatted = formatDollars(ratesBill);
@@ -54,6 +56,9 @@ export const ApplicationSummary = (props) => {
                     :
                 <p>My income (before tax) for the {taxYear} tax year is <strong>{total_income_formatted}</strong>.</p>
                 }
+                {income_less_than_5k && <p>
+                    I supported myself on less than $5,000 by {income_less_than_5k}
+                </p>}
             </div>
         </>
     )
@@ -63,6 +68,7 @@ ApplicationSummary.propTypes = {
     application: PropTypes.shape({
         full_name: PropTypes.string.isRequired,
         occupation: PropTypes.string.isRequired,
+        income_less_than_5k: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
         ratesBill: PropTypes.string.isRequired,
         noOfDependants: PropTypes.string.isRequired,
