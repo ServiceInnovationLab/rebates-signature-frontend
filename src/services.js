@@ -15,6 +15,7 @@ export const useFetchApplication = (token, onResult, deps) => {
             noOfDependants: fields.dependants,
             spouse_or_partner: (typeof fields.spouse_or_partner !== 'undefined') ? fields.spouse_or_partner === 'yes' : false,
             total_income: fields.income.total_income,
+            income_less_than_5k: fields.income_less_than_5k,
             moved_within_rating_year: (typeof fields.moved_within_rating_year !== 'undefined') ? fields.moved_within_rating_year === 'yes' : false,
             lived_in_property_1_July: (typeof fields.lived_in_property_1_July !== 'undefined') ? fields.lived_in_property_1_July === 'yes' : false,
         };
