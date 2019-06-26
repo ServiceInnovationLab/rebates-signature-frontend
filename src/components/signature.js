@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 export const Signature = (props) => {
     const [error, setError] = useState(false);
     const [sigCanvas, setSigCanvas] = useState(null);
+    const {extraClassBackButton, extraClassNextButton} = props;
 
     const onNext = () => {
         if (sigCanvas.isEmpty()) {
@@ -39,9 +40,13 @@ export const Signature = (props) => {
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    <button className='back' name="sign" onClick={props.back}>GO BACK</button>
                     <button
-                        className='next'
+                        className={"back " + extraClassBackButton}
+                        name="sign"
+                        onClick={props.back}>GO BACK</button>
+
+                    <button
+                        className={"next " + extraClassNextButton}
                         name="sign"
                         onClick={onNext}>{props.nextButtonLabel}</button>
                 </div>
@@ -53,8 +58,13 @@ export const Signature = (props) => {
 
                 <div className='signature'>
                     <div className="wrap-signature-canvas">
-                        { error && <p className="signature__error-msg"><span>Please sign before you proceed</span></p>}
+                        { error &&
+                        <p className="signature__error-msg ga-error-sigwrite">
+                            <span>Please sign before you proceed</span>
+                        </p>}
+
                         <span className="sigBgImage"></span>
+
                         <SignaturePad
                             ref={(ref) => setSigCanvas(ref)}
                             penColor='#369'

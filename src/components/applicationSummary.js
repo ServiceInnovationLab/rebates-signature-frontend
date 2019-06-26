@@ -6,6 +6,7 @@ export const ApplicationSummary = (props) => {
     let ratingYear = new Date().getFullYear() - 1;
     let taxYear = (new Date().getFullYear() - 2) + '/' + (new Date().getFullYear() - 1);
 
+    let {extraClassNextButton} = props;
     let {
         full_name,
         occupation,
@@ -17,14 +18,14 @@ export const ApplicationSummary = (props) => {
         lived_in_property_1_July,
         moved_within_rating_year} = props.application;
 
-    let rates_bill_formatted = formatDollars(ratesBill);
     let total_income_formatted = formatDollars(total_income);
+    let ratesBill_formatted = formatDollars(ratesBill);
 
     return (
         <>
             <div className="controlsBackground">
                 <div className="controls">
-                    <button className='next' onClick={props.onNext}>NEXT</button>
+                    <button className={"next " + extraClassNextButton} onClick={props.onNext}>NEXT</button>
                 </div>
             </div>
             <div className="text-content">
@@ -42,7 +43,7 @@ export const ApplicationSummary = (props) => {
                     {moved_within_rating_year ? ' I have moved ' : ' I have not moved'} within this rating year.
                 </p>
 
-                <p>My {ratingYear} rates bill (including water) is <strong>{rates_bill_formatted}</strong>.</p>
+                <p>My {ratingYear} rates bill (including water) is <strong>{ratesBill_formatted}</strong>.</p>
 
                 <p>I have <strong>{noOfDependants}</strong> dependants.</p>
 

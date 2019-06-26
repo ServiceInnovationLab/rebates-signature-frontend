@@ -13,6 +13,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "homepage": "/ipad/",
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "concurrently --kill-others \"nodemon test-server/server.js\" \"react-scripts start\"",
     "build": "react-scripts build",

@@ -43,7 +43,7 @@ module.exports.application = {
                 "dependants": "5",
                 "customer_id": "1234567",
                 "location": "191 Thorndon Quay",
-                "total_rates": "500",
+                "total_rates": "123456789",
                 "valuation_id": "12345 123 12",
                 "email": "fake@email.co",
                 "phone_number": "123456789",
