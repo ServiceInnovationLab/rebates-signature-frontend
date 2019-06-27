@@ -56,7 +56,7 @@ export const useSubmitApplication = (state, onResult, deps) => {
             }
         };
 
-        let response = await fetch(`/api/v1/signatues`,{
+        let response = await fetch(`/api/v1/signatures`,{
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
