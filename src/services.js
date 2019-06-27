@@ -29,10 +29,10 @@ export const useFetchApplication = (token, onResult, deps) => {
 export const useSubmitApplication = (state, onResult, deps) => {
     const task = usePendingFetch(async () => {
         const {
-            token, 
-            signatureApplicant, 
-            signatureWitness, 
-            application, 
+            token,
+            signatureApplicant,
+            signatureWitness,
+            application,
             witness
         } = state;
 
@@ -56,7 +56,7 @@ export const useSubmitApplication = (state, onResult, deps) => {
             }
         };
 
-        let response = await fetch(`/api/v1/rebate_forms/sign`,{
+        let response = await fetch(`/api/v1/signatures`,{
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
