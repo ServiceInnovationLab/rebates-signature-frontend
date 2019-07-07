@@ -5,13 +5,13 @@ export const useFetchApplication = (token, onResult, deps) => {
     const task = usePendingFetch(async () => {
         let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`);
         let json = await response.json();
-        let fields = json.data.attributes.fields;
+        let {total_rates, location, fields} = json.data.attributes;
 
         return {
             full_name: fields.full_name,
             occupation: fields.occupation,
-            address: fields.location,
-            ratesBill: fields.total_rates,
+            address: location,
+            ratesBill: total_rates,
             noOfDependants: fields.dependants,
             spouse_or_partner: (typeof fields.spouse_or_partner !== 'undefined') ? fields.spouse_or_partner === 'yes' : false,
             total_income: fields.income.total_income,
