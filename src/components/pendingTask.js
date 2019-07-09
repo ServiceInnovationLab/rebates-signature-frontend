@@ -6,6 +6,7 @@ export const PendingTask = (props) => {
 
     const {task, title, errorTitle, extraClassNextButton} = props;
 
+    const errorText = task.error && getErrorText(task.error, errorTitle)
     return (
         <>
             {task.pending &&
@@ -13,7 +14,7 @@ export const PendingTask = (props) => {
 
             {task.error &&
             <div className="wrap-system-msg">
-                <p className="system-msg system-msg--error">{errorTitle}</p>
+                <p className="system-msg system-msg--error">{errorText}</p>
                 <button className={"next " + extraClassNextButton} onClick={() => task.start()}>Try Again</button>
             </div>}
         </>
@@ -27,3 +28,11 @@ PendingTask.propTypes = {
         errorTitle: PropTypes.string.isRequired,
     })
 };
+
+function getErrorText (error, errorTitle) {
+    return error.message === "Conflict"
+        ? "This application has been updated and needs to be re-signed."
+        : error.message === "Forbidden"
+            ? "This application has already been signed."
+            : errorTitle
+}
