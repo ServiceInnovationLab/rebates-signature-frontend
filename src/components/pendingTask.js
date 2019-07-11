@@ -31,7 +31,7 @@ PendingTask.propTypes = {
 
 function getErrorText (error, errorTitle) {
     return error.message === "Conflict"
-        ? "This application has been updated and needs to be re-signed."
+        ? "This application has been updated. Please regenerate the QR code to sign the application."
         : error.message === "Unprocessable Entity"
             ? "This application has already been signed."
             : errorTitle
