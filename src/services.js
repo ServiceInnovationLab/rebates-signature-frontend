@@ -3,7 +3,17 @@ import {usePendingFetch, useAsyncRun} from "./lib";
 
 export const useFetchApplication = (token, onResult, deps) => {
     const task = usePendingFetch(async () => {
-        let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`);
+        let response = await fetch(`/api/v1/rebate_forms/?jwt=${token}`)
+        .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+                return response;
+            } else {
+                let error = new Error(response.statusText);
+                error.response = response.json();
+                throw error;
+            }
+        });
+
         let json = await response.json();
         let {total_rates, location, fields} = json.data.attributes;
 
@@ -72,7 +82,7 @@ export const useSubmitApplication = (state, onResult, deps) => {
                 return response;
             } else {
                 let error = new Error(response.statusText);
-                error.response = response;
+                error.response = response.json();
                 throw error;
             }
         });
